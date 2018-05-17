@@ -37,6 +37,7 @@ class Stub {
         auth: {
           bearer: this.channelProfile.channelAuthValues.access_token
         },
+        baseUrl: this.getBaseUrl(),
         json: true,
         gzip: true,
         simple: true,
@@ -125,6 +126,26 @@ class Stub {
         }
       });
     }
+  }
+
+  getBaseUrl() {
+    let baseUrl = `${this.channelProfile.channelSettingsValues.protocol}://${
+      this.channelProfile.channelSettingsValues.store_base_url
+    }`;
+
+    while (baseUrl.endsWith("/")) {
+      baseUrl = baseUrl.slice(0, -1);
+    }
+
+    if (!baseUrl.endsWith("/rest")) {
+      baseUrl = baseUrl.concat("/rest");
+    }
+
+    if (isNonEmptyString(this.channelProfile.channelSettingsValues.store_code)) {
+      baseUrl = baseUrl.concat(`/${this.channelProfile.channelSettingsValues.store_code}`);
+    }
+
+    return baseUrl;
   }
 }
 
