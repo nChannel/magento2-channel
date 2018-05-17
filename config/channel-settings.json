@@ -39,7 +39,7 @@
       },
       "configDef": {
         "configValues": {
-          "canUpdateFulfillmentFlag": true
+          "canUpdateFulfillmentFlag": false
         },
         "configView": ["canUpdateFulfillmentFlag"],
         "configModel": {
@@ -56,7 +56,7 @@
       "documentDef": {
         "schema": {},
         "referenceLocation": {
-          "fulfillmentBusinessReferences": [""],
+          "fulfillmentBusinessReferences": ["increment_id"],
           "salesOrderBusinessReferences": ["increment_id"]
         }
       }
@@ -85,58 +85,44 @@
             "canUpdateCustomerContactFlag": {
               "title": "PUT Customer, canUpdateCustomerContactFlag",
               "type": "boolean"
-            }
-          },
-          "required": ["canUpdateCustomerFlag", "canUpdateCustomerAddressFlag", "canUpdateCustomerContactFlag"]
-        },
-        "configView": ["canUpdateCustomerFlag", "canUpdateCustomerAddressFlag", "canUpdateCustomerContactFlag"],
-        "configValues": {
-          "canUpdateCustomerFlag": true,
-          "canUpdateCustomerAddressFlag": true,
-          "canUpdateCustomerContactFlag": false
-        }
-      },
-      "documentDef": {
-        "schema": {},
-        "referenceLocation": {
-          "customerBusinessReferences": ["", ""]
-        }
-      }
-    },
-    {
-      "name": "PUT CUSTOMERADDRESS",
-      "description": "PUT CUSTOMERADDRESS",
-      "channelVerb": "PUT",
-      "channelNoun": "CUSTOMERADDRESS",
-      "ruleDef": {
-        "ruleSchema": {},
-        "defaultRuleValues": {}
-      },
-      "configDef": {
-        "configModel": {
-          "type": "object",
-          "properties": {
+            },
             "doPutCustomerAddressesFlag": {
-              "title": "PUT Customer Address, doPutCustomerAddressesFlag",
+              "title": "PUT Customer, doPutCustomerAddressesFlag",
               "type": "boolean"
             },
-            "canUpdateCustomerAddressFlag": {
-              "title": "Update Customer Address, canUpdateCustomerAddressFlag",
+            "doPutCustomerContactsFlag": {
+              "title": "PUT Customer, doPutCustomerContactsFlag",
               "type": "boolean"
             }
           },
-          "required": ["doPutCustomerAddressesFlag", "canUpdateCustomerAddressFlag"]
+          "required": [
+            "canUpdateCustomerFlag",
+            "canUpdateCustomerAddressFlag",
+            "canUpdateCustomerContactFlag",
+            "doPutCustomerAddressesFlag",
+            "doPutCustomerContactsFlag"
+          ]
         },
-        "configView": ["doPutCustomerAddressesFlag", "canUpdateCustomerAddressFlag"],
+        "configView": [
+          "canUpdateCustomerFlag",
+          "canUpdateCustomerAddressFlag",
+          "canUpdateCustomerContactFlag",
+          "doPutCustomerAddressesFlag",
+          "doPutCustomerContactsFlag"
+        ],
         "configValues": {
-          "doPutCustomerAddressesFlag": true,
-          "canUpdateCustomerAddressFlag": true
+          "canUpdateCustomerFlag": true,
+          "canUpdateCustomerAddressFlag": false,
+          "canUpdateCustomerContactFlag": false,
+          "doPutCustomerAddressesFlag": false,
+          "doPutCustomerContactsFlag": false
         }
       },
       "documentDef": {
         "schema": {},
         "referenceLocation": {
-          "customerAddressBusinessReferences": ["", ""]
+          "customerBusinessReferences": ["email"],
+          "customerAddressBusinessReferences": ["street", "city", "postcode"]
         }
       }
     }
@@ -153,14 +139,18 @@
           },
           "store_base_url": {
             "title": "Store Base URL",
-            "tpye": "string"
+            "type": "string"
+          },
+          "store_code": {
+            "title": "Store Code",
+            "type": "string"
           },
           "implFolderName": {
             "title": "Implementation Folder Name",
             "type": "string"
           }
         },
-        "required": ["protocol", "implFolderName"]
+        "required": ["protocol", "store_base_url", "implFolderName"]
       },
       "configView": [
         {
@@ -170,6 +160,10 @@
         {
           "key": "store_base_url",
           "title": "Store Base URL"
+        },
+        {
+          "key": "store_code",
+          "title": "Store Code"
         },
         {
           "key": "implFolderName",
