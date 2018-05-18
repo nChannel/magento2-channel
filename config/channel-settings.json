@@ -121,8 +121,7 @@
       "documentDef": {
         "schema": {},
         "referenceLocation": {
-          "customerBusinessReferences": ["email"],
-          "customerAddressBusinessReferences": ["street", "city", "postcode"]
+          "customerBusinessReferences": ["email"]
         }
       }
     }
