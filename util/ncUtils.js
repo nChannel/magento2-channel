@@ -68,7 +68,64 @@ class Stub {
     } else {
       if (!isObject(this.payload.doc)) {
         this.messages.push(`The payload.doc object is ${this.payload.doc == null ? "missing" : "invalid"}.`);
+      } else {
+        if (this.name.startsWith("Get") && this.name.endsWith("FromQuery")) {
+          this.validateQueryDoc(this.payload.doc);
+        }
       }
+    }
+  }
+
+  validateQueryDoc(doc) {
+    if (doc.remoteIDs && (!doc.searchFields && !doc.modifiedDateRange && !doc.createdDateRange)) {
+      this.queryType = "remoteIDs";
+
+      if (!isNonEmptyArray(doc.remoteIDs)) {
+        this.messages.push("The remoteIDs property must be an array with at least 1 value.");
+      }
+    } else if (doc.searchFields && (!doc.remoteIDs && !doc.modifiedDateRange && !doc.createdDateRange)) {
+      this.queryType = "searchFields";
+
+      if (!isNonEmptyArray(doc.searchFields)) {
+        this.messages.push("The searchFields property must be an array with at least 1 key value pair object.");
+      } else {
+        if (
+          !doc.searchFields.every(
+            searchField => isNonEmptyString(searchField.searchField) && isNonEmptyArray(searchField.searchValues)
+          )
+        ) {
+          this.messages.push(
+            "searchFields array elements must be in the form: { searchField: 'key', searchValues: ['value_1'] }."
+          );
+        }
+      }
+    } else if (doc.modifiedDateRange && (!doc.searchFields && !doc.remoteIDs && !doc.createdDateRange)) {
+      this.queryType = "modifiedDateRange";
+
+      if (
+        !moment(doc.modifiedDateRange.startDateGMT).isValid() ||
+        !moment(doc.modifiedDateRange.endDateGMT).isValid()
+      ) {
+        this.messages.push("modifiedDateRange query requires valid startDateGMT and endDateGMT properties.");
+      } else {
+        if (!moment(doc.modifiedDateRange.startDateGMT).isBefore(doc.modifiedDateRange.endDateGMT)) {
+          this.messages.push("startDateGMT must come before endDateGMT.");
+        }
+      }
+    } else if (doc.createdDateRange && (!doc.searchFields && !doc.modifiedDateRange && !doc.remoteIDs)) {
+      this.queryType = "createdDateRange";
+
+      if (!moment(doc.createdDateRange.startDateGMT).isValid() || !moment(doc.createdDateRange.endDateGMT).isValid()) {
+        this.messages.push("createdDateRange query requires valid startDateGMT and endDateGMT properties.");
+      } else {
+        if (!moment(doc.createdDateRange.startDateGMT).isBefore(doc.createdDateRange.endDateGMT)) {
+          this.messages.push("startDateGMT must come before endDateGMT.");
+        }
+      }
+    } else {
+      this.messages.push(
+        "Query doc must contain one (and only one) of remoteIDs, searchFields, modifiedDateRange, or createdDateRange."
+      );
     }
   }
 
@@ -209,6 +266,8 @@ function extractBusinessReferences(businessReferences, doc, sep = ".") {
   }
 }
 
+const moment = require("moment");
+
 module.exports = {
   Stub,
   isFunction,
@@ -220,5 +279,6 @@ module.exports = {
   isNonEmptyArray,
   isNumber,
   isInteger,
-  extractBusinessReferences
+  extractBusinessReferences,
+  moment
 };
