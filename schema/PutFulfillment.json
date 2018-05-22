@@ -1,0 +1,83 @@
+{
+  "type": "object",
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "extension_attributes": {
+            "type": "object"
+          },
+          "order_item_id": {
+            "type": "number"
+          },
+          "qty": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "notify": {
+      "type": "boolean"
+    },
+    "appendComment": {
+      "type": "boolean"
+    },
+    "comment": {
+      "type": "object",
+      "properties": {
+        "extension_attributes": {
+          "type": "object"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "is_visible_on_front": {
+          "type": "number"
+        }
+      }
+    },
+    "tracks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "extension_attributes": {
+            "type": "object"
+          },
+          "track_number": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "carrier_code": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "packages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "extension_attributes": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "arguments": {
+      "type": "object",
+      "properties": {
+        "extension_attributes": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}
