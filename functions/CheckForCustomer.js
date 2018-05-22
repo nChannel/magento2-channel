@@ -42,14 +42,14 @@ function CheckForCustomer(ncUtil, channelProfile, flowContext, payload, callback
     const query = {
       search_criteria: {
         filter_groups: [],
-        page_size: 1,
+        page_size: 2,
         current_page: 1
       },
       fields: "total_count,search_criteria,items[id"
     };
 
     stub.channelProfile.customerBusinessReferences.forEach(refName => {
-      const refValue = nc.extractBusinessReferences([refName], stub.payload.doc);
+      const refValue = nc.extractBusinessReferences([refName], stub.payload.doc.customer);
       query.search_criteria.filter_groups.push({ filters: [{ field: refName, value: refValue }] });
       query.fields = query.fields.concat(`,${refName}`);
     });

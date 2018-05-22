@@ -5,7 +5,14 @@
     "logger": null
   },
   "channelProfile": {
-    "channelAuthValues": {}
+    "channelAuthValues": {
+      "access_token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "channelSettingsValues": {
+      "protocol": "http",
+      "store_base_url": "example.com",
+      "store_code": "default"
+    }
   },
   "docs": [
     {
@@ -14,23 +21,31 @@
         {
           "ncStatusCode": 200,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@example.com",
+                "firstname": "unique",
+                "lastname": "exists"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "http://example.com/default/rest",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/customers/search?search_criteria[filter_groups][0][filters][0][field]=email&search_criteria[filter_groups][0][filters][0][value]=test@example.com&search_criteria[page_size]=2&search_criteria[current_page]=1&fields=total_count,search_criteria,items[id,email]",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "customers": [
+                "items": [
                   {
-                    "id": 1073339459,
-                    "email": "derek.boytim@nchannel.com"
+                    "id": 11,
+                    "email": "test@example.com"
                   }
-                ]
+                ],
+                "total_count": 1
               }
             }
           ],
@@ -43,20 +58,24 @@
           "payload": {
             "doc": {
               "customer": {
-                "email": "derek.boytim@nchannel.com"
+                "email": "test@example.com",
+                "firstname": "doesNot",
+                "lastname": "exist"
               }
             }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "http://example.com/default/rest",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/customers/search?search_criteria[filter_groups][0][filters][0][field]=email&search_criteria[filter_groups][0][filters][0][value]=test@example.com&search_criteria[page_size]=2&search_criteria[current_page]=1&fields=total_count,search_criteria,items[id,email]",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "customers": []
+                "items": [],
+                "total_count": 0
               }
             }
           ],
@@ -67,27 +86,35 @@
         {
           "ncStatusCode": 409,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@example.com",
+                "firstname": "multiple",
+                "lastname": "matches"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "http://example.com/default/rest",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/customers/search?search_criteria[filter_groups][0][filters][0][field]=email&search_criteria[filter_groups][0][filters][0][value]=test@example.com&search_criteria[page_size]=2&search_criteria[current_page]=1&fields=total_count,search_criteria,items[id,email]",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "customers": [
+                "items": [
                   {
-                    "id": 1073339459,
-                    "email": "derek.boytim@nchannel.com"
+                    "id": 11,
+                    "email": "test@example.com"
                   },
                   {
-                    "id": 1073339459,
-                    "email": "derek.boytim@nchannel.com"
+                    "id": 12,
+                    "email": "test@example.com"
                   }
-                ]
+                ],
+                "total_count": 2
               }
             }
           ],
@@ -98,19 +125,24 @@
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@example.com",
+                "firstname": "not",
+                "lastname": "authorized"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "http://example.com/default/rest",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/customers/search?search_criteria[filter_groups][0][filters][0][field]=email&search_criteria[filter_groups][0][filters][0][value]=test@example.com&search_criteria[page_size]=2&search_criteria[current_page]=1&fields=total_count,search_criteria,items[id,email]",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 401,
-              "responsePayload": {
-                "customers": []
-              }
+              "responsePayload": {}
             }
           ],
           "channelProfile": {
@@ -120,19 +152,24 @@
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@example.com",
+                "firstname": "tooMany",
+                "lastname": "requests"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "http://example.com/default/rest",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/customers/search?search_criteria[filter_groups][0][filters][0][field]=email&search_criteria[filter_groups][0][filters][0][value]=test@example.com&search_criteria[page_size]=2&search_criteria[current_page]=1&fields=total_count,search_criteria,items[id,email]",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 429,
-              "responsePayload": {
-                "customers": []
-              }
+              "responsePayload": {}
             }
           ],
           "channelProfile": {
@@ -142,19 +179,24 @@
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@example.com",
+                "firstname": "server",
+                "lastname": "error"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "http://example.com/default/rest",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/customers/search?search_criteria[filter_groups][0][filters][0][field]=email&search_criteria[filter_groups][0][filters][0][value]=test@example.com&search_criteria[page_size]=2&search_criteria[current_page]=1&fields=total_count,search_criteria,items[id,email]",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 500,
-              "responsePayload": {
-                "customers": []
-              }
+              "responsePayload": {}
             }
           ],
           "channelProfile": {
@@ -836,9 +878,7 @@
           "ncStatusCode": 200,
           "payload": {
             "doc": {
-              "Addresses": [
-                {}
-              ]
+              "Addresses": [{}]
             }
           },
           "baseUri": "https://localhost",
@@ -869,9 +909,7 @@
           "ncStatusCode": 200,
           "payload": {
             "doc": {
-              "ContactMethods": [
-                {}
-              ]
+              "ContactMethods": [{}]
             }
           },
           "baseUri": "https://localhost",
