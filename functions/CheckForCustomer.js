@@ -66,12 +66,12 @@ function CheckForCustomer(ncUtil, channelProfile, flowContext, payload, callback
     const customers = response.body.items;
     stub.out.response.endpointStatusCode = response.statusCode;
 
-    if (!nc.isArray(customers)) {
+    if (!nc.isArray(customers) && response.body.total_count > 0) {
       throw new TypeError(`Search response is not an array. Response: ${JSON.stringify(response.body, null, 2)}`);
     }
 
-    if (customers.length === 1) {
-      if (!nc.isObject(customers[0]) || !nc.isNonEmptyString(customers[0].id)) {
+    if (response.body.total_count === 1) {
+      if (!nc.isObject(customers[0]) || !nc.isInteger(customers[0].id)) {
         throw new TypeError(
           `Customer object is not in expected format. Response: ${JSON.stringify(response.body, null, 2)}`
         );
@@ -83,7 +83,7 @@ function CheckForCustomer(ncUtil, channelProfile, flowContext, payload, callback
         stub.channelProfile.customerBusinessReferences,
         customers[0]
       );
-    } else if (customers.length === 0) {
+    } else if (response.body.total_count === 0) {
       logInfo("Customer does not exist.");
       stub.out.ncStatusCode = 204;
     } else {

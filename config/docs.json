@@ -9,7 +9,7 @@
       "access_token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     },
     "channelSettingsValues": {
-      "protocol": "http",
+      "protocol": "https",
       "store_base_url": "example.com",
       "store_code": "default"
     }
@@ -29,12 +29,12 @@
               }
             }
           },
-          "baseUri": "http://example.com/default/rest",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
               "uri":
-                "/V1/customers/search?search_criteria[filter_groups][0][filters][0][field]=email&search_criteria[filter_groups][0][filters][0][value]=test@example.com&search_criteria[page_size]=2&search_criteria[current_page]=1&fields=total_count,search_criteria,items[id,email]",
+                "/V1/customers/search?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=email&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=test%40example.com&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1&fields=total_count%2Csearch_criteria%2Citems%5Bid%2Cemail%5D",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 200,
@@ -64,17 +64,17 @@
               }
             }
           },
-          "baseUri": "http://example.com/default/rest",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
               "uri":
-                "/V1/customers/search?search_criteria[filter_groups][0][filters][0][field]=email&search_criteria[filter_groups][0][filters][0][value]=test@example.com&search_criteria[page_size]=2&search_criteria[current_page]=1&fields=total_count,search_criteria,items[id,email]",
+                "/V1/customers/search?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=email&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=test%40example.com&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1&fields=total_count%2Csearch_criteria%2Citems%5Bid%2Cemail%5D",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "items": [],
+                "items": null,
                 "total_count": 0
               }
             }
@@ -94,12 +94,12 @@
               }
             }
           },
-          "baseUri": "http://example.com/default/rest",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
               "uri":
-                "/V1/customers/search?search_criteria[filter_groups][0][filters][0][field]=email&search_criteria[filter_groups][0][filters][0][value]=test@example.com&search_criteria[page_size]=2&search_criteria[current_page]=1&fields=total_count,search_criteria,items[id,email]",
+                "/V1/customers/search?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=email&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=test%40example.com&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1&fields=total_count%2Csearch_criteria%2Citems%5Bid%2Cemail%5D",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 200,
@@ -133,12 +133,12 @@
               }
             }
           },
-          "baseUri": "http://example.com/default/rest",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
               "uri":
-                "/V1/customers/search?search_criteria[filter_groups][0][filters][0][field]=email&search_criteria[filter_groups][0][filters][0][value]=test@example.com&search_criteria[page_size]=2&search_criteria[current_page]=1&fields=total_count,search_criteria,items[id,email]",
+                "/V1/customers/search?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=email&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=test%40example.com&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1&fields=total_count%2Csearch_criteria%2Citems%5Bid%2Cemail%5D",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 401,
@@ -160,12 +160,12 @@
               }
             }
           },
-          "baseUri": "http://example.com/default/rest",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
               "uri":
-                "/V1/customers/search?search_criteria[filter_groups][0][filters][0][field]=email&search_criteria[filter_groups][0][filters][0][value]=test@example.com&search_criteria[page_size]=2&search_criteria[current_page]=1&fields=total_count,search_criteria,items[id,email]",
+                "/V1/customers/search?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=email&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=test%40example.com&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1&fields=total_count%2Csearch_criteria%2Citems%5Bid%2Cemail%5D",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 429,
@@ -187,12 +187,12 @@
               }
             }
           },
-          "baseUri": "http://example.com/default/rest",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
               "uri":
-                "/V1/customers/search?search_criteria[filter_groups][0][filters][0][field]=email&search_criteria[filter_groups][0][filters][0][value]=test@example.com&search_criteria[page_size]=2&search_criteria[current_page]=1&fields=total_count,search_criteria,items[id,email]",
+                "/V1/customers/search?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=email&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=test%40example.com&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1&fields=total_count%2Csearch_criteria%2Citems%5Bid%2Cemail%5D",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 500,
