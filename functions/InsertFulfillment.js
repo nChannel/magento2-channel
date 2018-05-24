@@ -5,7 +5,6 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
 
   validateFunction()
     .then(insertShipment)
-    //.then(getShipmentDetails)
     .then(buildResponse)
     .catch(handleError)
     .then(() => callback(stub.out))
@@ -15,18 +14,6 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
         throw error;
       });
     });
-
-  function logInfo(msg) {
-    stub.log(msg, "info");
-  }
-
-  function logWarn(msg) {
-    stub.log(msg, "warn");
-  }
-
-  function logError(msg) {
-    stub.log(msg, "error");
-  }
 
   async function validateFunction() {
     if (stub.messages.length > 0) {
@@ -45,14 +32,6 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
       body: stub.payload.doc
     });
   }
-
-  // async function getShipmentDetails(response) {
-  //   logInfo(`Getting details for shipment id ${response.body}...`);
-
-  //   return await stub.request.get({
-  //     url: `/V1/shipment/${response.body}`
-  //   });
-  // }
 
   async function buildResponse(response) {
     stub.out.response.endpointStatusCode = response.statusCode;
@@ -81,6 +60,18 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
     }
     stub.out.payload.error = error;
     stub.out.ncStatusCode = stub.out.ncStatusCode || 500;
+  }
+
+  function logInfo(msg) {
+    stub.log(msg, "info");
+  }
+
+  function logWarn(msg) {
+    stub.log(msg, "warn");
+  }
+
+  function logError(msg) {
+    stub.log(msg, "error");
   }
 }
 
