@@ -377,13 +377,13 @@ if (fs.existsSync('config/channel-settings.json')) {
                     break;
                   case 'POST':
                     errorTest === false ?
-                    fake.post(test.links[i].uri, test.payload.doc).reply(statusCode != null ? statusCode : test.links[i].statusCode, test.links[i].responsePayload) :
-                    fake.post(test.links[i].uri, test.payload.doc).replyWithError({ message: "Internal Error" });
+                    fake.post(test.links[i].uri).reply(statusCode != null ? statusCode : test.links[i].statusCode, test.links[i].responsePayload) :
+                    fake.post(test.links[i].uri).replyWithError({ message: "Internal Error" });
                     break;
                   case 'PUT':
                     errorTest === false ?
-                    fake.put(test.links[i].uri, test.payload.doc).reply(statusCode != null ? statusCode : test.links[i].statusCode, test.links[i].responsePayload) :
-                    fake.put(test.links[i].uri, test.payload.doc).replyWithError({ message: "Internal Error" });
+                    fake.put(test.links[i].uri).reply(statusCode != null ? statusCode : test.links[i].statusCode, test.links[i].responsePayload) :
+                    fake.put(test.links[i].uri).replyWithError({ message: "Internal Error" });
                     break;
                   case 'DELETE':
                     errorTest === false ?
