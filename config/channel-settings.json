@@ -39,15 +39,20 @@
       },
       "configDef": {
         "configValues": {
-          "canUpdateFulfillmentFlag": false
+          "canUpdateFulfillmentFlag": false,
+          "doInsertInvoice": true
         },
-        "configView": ["canUpdateFulfillmentFlag"],
+        "configView": ["canUpdateFulfillmentFlag", "doInsertInvoice"],
         "configModel": {
-          "required": ["canUpdateFulfillmentFlag"],
+          "required": ["canUpdateFulfillmentFlag", "doInsertInvoice"],
           "properties": {
             "canUpdateFulfillmentFlag": {
               "type": "boolean",
               "title": "PUT Fulfillment, canUpdateFulfillmentFlag"
+            },
+            "doInsertInvoice": {
+              "type": "boolean",
+              "title": "PUT Fulfillment, doInsertInvoice"
             }
           },
           "type": "object"
@@ -55,10 +60,7 @@
       },
       "documentDef": {
         "schema": {},
-        "referenceLocation": {
-          "fulfillmentBusinessReferences": ["increment_id"],
-          "salesOrderBusinessReferences": ["increment_id"]
-        }
+        "referenceLocation": {}
       }
     },
     {

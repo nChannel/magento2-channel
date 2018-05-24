@@ -1852,8 +1852,18 @@
           "ncStatusCode": 201,
           "payload": {
             "doc": {
-              "salesOrderRemoteID": 10
-            }
+              "invoice": {},
+              "ship": {
+                "tracks": [
+                  {
+                    "trackNumber": "abc123",
+                    "title": "same day",
+                    "carrierCode": "UPS"
+                  }
+                ]
+              }
+            },
+            "salesOrderRemoteID": 10
           },
           "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
@@ -1873,7 +1883,19 @@
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": { "salesOrderRemoteID": 10 }
+            "doc": {
+              "invoice": {},
+              "ship": {
+                "tracks": [
+                  {
+                    "trackNumber": "abc123",
+                    "title": "same day",
+                    "carrierCode": "UPS"
+                  }
+                ]
+              }
+            },
+            "salesOrderRemoteID": 10
           },
           "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
@@ -1893,7 +1915,19 @@
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": { "salesOrderRemoteID": 10 }
+            "doc": {
+              "invoice": {},
+              "ship": {
+                "tracks": [
+                  {
+                    "trackNumber": "abc123",
+                    "title": "same day",
+                    "carrierCode": "UPS"
+                  }
+                ]
+              }
+            },
+            "salesOrderRemoteID": 10
           },
           "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
@@ -1913,7 +1947,19 @@
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": { "salesOrderRemoteID": 10 }
+            "doc": {
+              "invoice": {},
+              "ship": {
+                "tracks": [
+                  {
+                    "trackNumber": "abc123",
+                    "title": "same day",
+                    "carrierCode": "UPS"
+                  }
+                ]
+              }
+            },
+            "salesOrderRemoteID": 10
           },
           "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},

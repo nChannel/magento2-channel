@@ -3,6 +3,7 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
   const stub = new nc.Stub("InsertFulfillment", null, ...arguments);
 
   validateFunction()
+    .then(insertInvoice)
     .then(insertShipment)
     .then(buildResponse)
     .catch(handleError)
@@ -15,6 +16,17 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
     });
 
   async function validateFunction() {
+    if (stub.messages.length === 0) {
+      if (stub.flowContext && stub.flowContext.doInvoice) {
+        if (!nc.isNonEmptyObject(stub.payload.doc.invoice)) {
+          stub.messages.push("The 'doInvoice' flag is true, but no invoice document was provided.");
+        }
+      }
+      if (!nc.isNonEmptyObject(stub.payload.doc.ship)) {
+        stub.messages.push("No ship document was provided.");
+      }
+    }
+
     if (stub.messages.length > 0) {
       stub.messages.forEach(msg => logError(msg));
       stub.out.ncStatusCode = 400;
@@ -23,13 +35,35 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
     logInfo("Function is valid.");
   }
 
+  async function insertInvoice() {
+    if (stub.flowContext && stub.flowContext.doInvoice) {
+      logInfo("Inserting new invoice record...");
+
+      return await stub.request.post({
+        url: `/V1/order/${stub.payload.salesOrderRemoteID}/invoice`,
+        body: stub.payload.doc.invoice
+      });
+    }
+  }
+
   async function insertShipment() {
     logInfo("Inserting new shipment record...");
 
-    return await stub.request.post({
-      url: `/V1/order/${stub.payload.doc.salesOrderRemoteID}/ship`,
-      body: stub.payload.doc
-    });
+    try {
+      return await stub.request.post({
+        url: `/V1/order/${stub.payload.salesOrderRemoteID}/ship`,
+        body: stub.payload.doc.ship
+      });
+    } catch (error) {
+      if (stub.flowContext && stub.flowContext.doInvoice) {
+        if (error.statusCode >= 500 || error.statusCode === 429) {
+          // Force statusCode to 400 to prevent unwanted retries.
+          error.statusCode = 400; // We do not want to retry because it could result in duplicate invoices or payments.
+          logError("The invoice was inserted successfully, but the shipment insertion has failed.");
+        }
+      }
+      throw error;
+    }
   }
 
   async function buildResponse(response) {
