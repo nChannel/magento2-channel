@@ -3,79 +3,137 @@
   "definitions": {},
   "$schema": "http://json-schema.org/draft-06/schema#",
   "properties": {
-    "items": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "extension_attributes": {
-            "type": "object"
-          },
-          "order_item_id": {
-            "type": "number"
-          },
-          "qty": {
-            "type": "number"
-          }
-        }
-      }
-    },
-    "notify": {
-      "type": "boolean"
-    },
-    "appendComment": {
-      "type": "boolean"
-    },
-    "comment": {
+    "invoice": {
       "type": "object",
       "properties": {
-        "extension_attributes": {
-          "type": "object"
+        "capture": {
+          "type": "boolean"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "extensionAttributes": {
+                "type": "object"
+              },
+              "orderItemId": {
+                "type": "number"
+              },
+              "qty": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "notify": {
+          "type": "boolean"
+        },
+        "appendComment": {
+          "type": "boolean"
         },
         "comment": {
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "extensionAttributes": {
+              "type": "object"
+            },
+            "comment": {
+              "type": "string"
+            },
+            "isVisibleOnFront": {
+              "type": "number"
+            }
+          }
         },
-        "is_visible_on_front": {
-          "type": "number"
-        }
-      }
-    },
-    "tracks": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "extension_attributes": {
-            "type": "object"
-          },
-          "track_number": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "carrier_code": {
-            "type": "string"
+        "arguments": {
+          "type": "object",
+          "properties": {
+            "extensionAttributes": {
+              "type": "object"
+            }
           }
         }
       }
     },
-    "packages": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "extension_attributes": {
-            "type": "object"
-          }
-        }
-      }
-    },
-    "arguments": {
+    "ship": {
       "type": "object",
       "properties": {
-        "extension_attributes": {
-          "type": "object"
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "extensionAttributes": {
+                "type": "object"
+              },
+              "orderItemId": {
+                "type": "number"
+              },
+              "qty": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "notify": {
+          "type": "boolean"
+        },
+        "appendComment": {
+          "type": "boolean"
+        },
+        "comment": {
+          "type": "object",
+          "properties": {
+            "extensionAttributes": {
+              "type": "object"
+            },
+            "comment": {
+              "type": "string"
+            },
+            "isVisibleOnFront": {
+              "type": "number"
+            }
+          }
+        },
+        "tracks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "extensionAttributes": {
+                "type": "object"
+              },
+              "trackNumber": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "carrierCode": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "packages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "extensionAttributes": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "arguments": {
+          "type": "object",
+          "properties": {
+            "extensionAttributes": {
+              "type": "object"
+            }
+          }
         }
       }
     }
