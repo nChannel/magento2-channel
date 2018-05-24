@@ -1744,7 +1744,7 @@
               "uri": "/V1/customers",
               "method": "POST",
               "replyHeaders": {},
-              "statusCode": 201,
+              "statusCode": 200,
               "responsePayload": {
                 "id": 17,
                 "group_id": 1,

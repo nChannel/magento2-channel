@@ -48,7 +48,7 @@ function InsertCustomer(ncUtil, channelProfile, flowContext, payload, callback) 
   async function buildResponse(response) {
     const customer = response.body;
     stub.out.response.endpointStatusCode = response.statusCode;
-    stub.out.ncStatusCode = response.statusCode;
+    stub.out.ncStatusCode = 201;
     stub.out.payload.customerRemoteID = customer.id;
     stub.out.payload.customerBusinessReference = nc.extractBusinessReferences(
       stub.channelProfile.customerBusinessReferences,

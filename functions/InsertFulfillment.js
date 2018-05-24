@@ -56,7 +56,7 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
 
   async function buildResponse(response) {
     stub.out.response.endpointStatusCode = response.statusCode;
-    stub.out.ncStatusCode = response.statusCode;
+    stub.out.ncStatusCode = 201;
     stub.out.payload.fulfillmentRemoteID = response.body.entity_id;
     stub.out.payload.fulfillmentBusinessReference = nc.extractBusinessReferences(
       stub.channelProfile.fulfillmentBusinessReferences,
