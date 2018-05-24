@@ -1,7 +1,6 @@
 function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callback) {
   const nc = require("../util/ncUtils");
-  const referenceLocations = ["fulfillmentBusinessReferences"];
-  const stub = new nc.Stub("InsertFulfillment", referenceLocations, ...arguments);
+  const stub = new nc.Stub("InsertFulfillment", null, ...arguments);
 
   validateFunction()
     .then(insertShipment)
@@ -37,10 +36,6 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
     stub.out.response.endpointStatusCode = response.statusCode;
     stub.out.ncStatusCode = 201;
     stub.out.payload.fulfillmentRemoteID = response.body.entity_id;
-    stub.out.payload.fulfillmentBusinessReference = nc.extractBusinessReferences(
-      stub.channelProfile.fulfillmentBusinessReferences,
-      response.body
-    );
     stub.out.payload.salesOrderRemoteID = response.body.order_id;
   }
 

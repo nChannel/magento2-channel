@@ -173,15 +173,17 @@ class Stub {
         }
       }
 
-      this.referenceLocations.forEach(referenceLocation => {
-        if (!isNonEmptyArray(this.channelProfile[referenceLocation])) {
-          this.messages.push(
-            `The channelProfile.${referenceLocation} array is ${
-              this.channelProfile[referenceLocation] == null ? "missing" : "invalid"
-            }.`
-          );
-        }
-      });
+      if (isNonEmptyArray(this.referenceLocations)) {
+        this.referenceLocations.forEach(referenceLocation => {
+          if (!isNonEmptyArray(this.channelProfile[referenceLocation])) {
+            this.messages.push(
+              `The channelProfile.${referenceLocation} array is ${
+                this.channelProfile[referenceLocation] == null ? "missing" : "invalid"
+              }.`
+            );
+          }
+        });
+      }
     }
   }
 
