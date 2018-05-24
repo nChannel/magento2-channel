@@ -1851,37 +1851,35 @@
         {
           "ncStatusCode": 201,
           "payload": {
-            "doc": {}
+            "doc": {
+              "salesOrderRemoteID": 10
+            }
           },
           "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/order/10/ship",
               "method": "POST",
               "replyHeaders": {},
-              "statusCode": 201,
-              "responsePayload": {
-                "fulfillment": {
-                  "id": 1073339459
-                }
-              }
+              "statusCode": 200,
+              "responsePayload": "24"
             }
           ],
           "channelProfile": {
-            "fulfillmentBusinessReferences": ["fulfillmentid"]
+            "fulfillmentBusinessReferences": ["entity_id"]
           }
         },
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": { "salesOrderRemoteID": 10 }
           },
           "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/order/10/ship",
               "method": "POST",
               "replyHeaders": {},
               "statusCode": 400,
@@ -1889,19 +1887,19 @@
             }
           ],
           "channelProfile": {
-            "fulfillmentBusinessReferences": ["fulfillmentid"]
+            "fulfillmentBusinessReferences": ["entity_id"]
           }
         },
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": { "salesOrderRemoteID": 10 }
           },
           "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/order/10/ship",
               "method": "POST",
               "replyHeaders": {},
               "statusCode": 429,
@@ -1909,19 +1907,19 @@
             }
           ],
           "channelProfile": {
-            "fulfillmentBusinessReferences": ["fulfillmentid"]
+            "fulfillmentBusinessReferences": ["entity_id"]
           }
         },
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": { "salesOrderRemoteID": 10 }
           },
           "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/order/10/ship",
               "method": "POST",
               "replyHeaders": {},
               "statusCode": 500,
@@ -1929,7 +1927,7 @@
             }
           ],
           "channelProfile": {
-            "fulfillmentBusinessReferences": ["fulfillmentid"]
+            "fulfillmentBusinessReferences": ["entity_id"]
           }
         }
       ]
