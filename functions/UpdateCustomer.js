@@ -28,10 +28,12 @@ function UpdateCustomer(ncUtil, channelProfile, flowContext, payload, callback) 
   }
 
   async function validateFunction() {
-    if (!nc.isInteger(stub.payload.customerRemoteID)) {
-      stub.messages.push(
-        `The payload.customerRemoteID integer is ${stub.payload.customerRemoteID == null ? "missing" : "invalid"}.`
-      );
+    if (stub.messages.length === 0) {
+      if (!nc.isInteger(stub.payload.customerRemoteID)) {
+        stub.messages.push(
+          `The payload.customerRemoteID integer is ${stub.payload.customerRemoteID == null ? "missing" : "invalid"}.`
+        );
+      }
     }
 
     if (stub.messages.length > 0) {
