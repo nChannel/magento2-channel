@@ -95,6 +95,15 @@
             "doPutCustomerContactsFlag": {
               "title": "PUT Customer, doPutCustomerContactsFlag",
               "type": "boolean"
+            },
+            "addressUpdateMethod": {
+              "title": "PUT Customer, addressUpdateMethod",
+              "type": "string",
+              "enum": ["append", "merge", "replace"]
+            },
+            "addressMatchingExpression": {
+              "title": "PUT Customer, addressMatchingExpression",
+              "type": "string"
             }
           },
           "required": [
@@ -102,7 +111,9 @@
             "canUpdateCustomerAddressFlag",
             "canUpdateCustomerContactFlag",
             "doPutCustomerAddressesFlag",
-            "doPutCustomerContactsFlag"
+            "doPutCustomerContactsFlag",
+            "addressUpdateMethod",
+            "addressMatchingExpression"
           ]
         },
         "configView": [
@@ -110,14 +121,19 @@
           "canUpdateCustomerAddressFlag",
           "canUpdateCustomerContactFlag",
           "doPutCustomerAddressesFlag",
-          "doPutCustomerContactsFlag"
+          "doPutCustomerContactsFlag",
+          "addressUpdateMethod",
+          "addressMatchingExpression"
         ],
         "configValues": {
           "canUpdateCustomerFlag": true,
           "canUpdateCustomerAddressFlag": false,
           "canUpdateCustomerContactFlag": false,
           "doPutCustomerAddressesFlag": false,
-          "doPutCustomerContactsFlag": false
+          "doPutCustomerContactsFlag": false,
+          "addressUpdateMethod": "merge",
+          "addressMatchingExpression":
+            "$lowercase($replace($trim($join([firstname,lastname,street[0],city,country_id,$string(region_id)])),' ',''))"
         }
       },
       "documentDef": {

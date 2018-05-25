@@ -245,8 +245,6 @@ function isInteger(int) {
 }
 
 function extractBusinessReferences(businessReferences, doc, sep = ".") {
-  const jsonata = require("jsonata");
-
   if (!isArray(businessReferences)) {
     throw new TypeError("Error: businessReferences must be an Array.");
   } else if (!isObject(doc)) {
@@ -268,6 +266,7 @@ function extractBusinessReferences(businessReferences, doc, sep = ".") {
   }
 }
 
+const jsonata = require("jsonata");
 const moment = require("moment");
 
 module.exports = {
@@ -282,5 +281,6 @@ module.exports = {
   isNumber,
   isInteger,
   extractBusinessReferences,
+  jsonata,
   moment
 };

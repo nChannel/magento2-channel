@@ -4,6 +4,8 @@ function UpdateCustomer(ncUtil, channelProfile, flowContext, payload, callback) 
   const stub = new nc.Stub("UpdateCustomer", referenceLocations, ...arguments);
 
   validateFunction()
+    .then(lookupCustomer)
+    .then(combineAddresses)
     .then(updateCustomer)
     .then(buildResponse)
     .catch(handleError)
@@ -14,18 +16,6 @@ function UpdateCustomer(ncUtil, channelProfile, flowContext, payload, callback) 
         throw error;
       });
     });
-
-  function logInfo(msg) {
-    stub.log(msg, "info");
-  }
-
-  function logWarn(msg) {
-    stub.log(msg, "warn");
-  }
-
-  function logError(msg) {
-    stub.log(msg, "error");
-  }
 
   async function validateFunction() {
     if (stub.messages.length === 0) {
@@ -44,12 +34,72 @@ function UpdateCustomer(ncUtil, channelProfile, flowContext, payload, callback) 
     logInfo("Function is valid.");
   }
 
-  async function updateCustomer() {
+  async function lookupCustomer() {
+    logInfo("Getting existing customer details...");
+
+    return await stub.request.get({
+      url: `/V1/customers/${stub.payload.customerRemoteID}`
+    });
+  }
+
+  async function combineAddresses(response) {
+    const existingCustomer = response.body;
+    const newCustomer = stub.payload.doc.customer;
+
+    switch (flowContext.addressUpdateMethod) {
+      case "append":
+        logInfo("Appending new addresses to existing customer address collection.");
+
+        if (nc.isNonEmptyArray(existingCustomer.addresses)) {
+          if (nc.isArray(newCustomer.addresses)) {
+            newCustomer.addresses.push(...existingCustomer.addresses);
+          } else {
+            newCustomer.addresses = existingCustomer.addresses;
+          }
+        }
+
+        break;
+
+      case "merge":
+        logInfo("Attempting to match new addresses with existing ones and merge the 2 collections together.");
+        if (nc.isNonEmptyArray(existingCustomer.addresses) && !nc.isNonEmptyArray(newCustomer.addresses)) {
+          newCustomer.addresses = existingCustomer.addresses;
+        } else if (nc.isNonEmptyArray(existingCustomer.addresses) && nc.isNonEmptyArray(newCustomer.addresses)) {
+          const expression = nc.jsonata(flowContext.addressMatchingExpression);
+          for (let e = 0; e < existingCustomer.addresses.length; e++) {
+            let eUsed = false;
+            for (let n = 0; n < newCustomer.addresses.length; n++) {
+              if (newCustomer.addresses[n].id == null && !eUsed) {
+                if (
+                  expression.evaluate(existingCustomer.addresses[e]) === expression.evaluate(newCustomer.addresses[n])
+                ) {
+                  newCustomer.addresses[n].id = existingCustomer.addresses[e].id;
+                  eUsed = true;
+                  break;
+                }
+              }
+            }
+            if (!eUsed) {
+              newCustomer.addresses.push(existingCustomer.addresses[e]);
+            }
+          }
+        }
+        break;
+
+      case "replace":
+      default:
+        logInfo("The new addresses array will completely replace the existing addresses array.");
+    }
+
+    return newCustomer;
+  }
+
+  async function updateCustomer(customer) {
     logInfo("Updating existing customer record...");
 
     return await stub.request.put({
       url: `/V1/customers/${stub.payload.customerRemoteID}`,
-      body: stub.payload.doc
+      body: { customer: customer }
     });
   }
 
@@ -80,6 +130,18 @@ function UpdateCustomer(ncUtil, channelProfile, flowContext, payload, callback) 
     }
     stub.out.payload.error = error;
     stub.out.ncStatusCode = stub.out.ncStatusCode || 500;
+  }
+
+  function logInfo(msg) {
+    stub.log(msg, "info");
+  }
+
+  function logWarn(msg) {
+    stub.log(msg, "warn");
+  }
+
+  function logError(msg) {
+    stub.log(msg, "error");
   }
 }
 

@@ -2268,6 +2268,24 @@
           "links": [
             {
               "uri": "/V1/customers/17",
+              "method": "GET",
+              "replyHeaders": {},
+              "statusCode": 200,
+              "responsePayload": {
+                "id": 17,
+                "group_id": 1,
+                "updated_at": "2018-05-24 02:12:45",
+                "email": "test@test.com",
+                "firstname": "test",
+                "lastname": "test",
+                "store_id": 1,
+                "website_id": 1,
+                "addresses": [],
+                "disable_auto_group_change": 0
+              }
+            },
+            {
+              "uri": "/V1/customers/17",
               "method": "PUT",
               "replyHeaders": {},
               "statusCode": 200,
@@ -2287,6 +2305,11 @@
           ],
           "channelProfile": {
             "customerBusinessReferences": ["email"]
+          },
+          "flowContext": {
+            "addressUpdateMethod": "merge",
+            "addressMatchingExpression":
+              "$lowercase($replace($trim($join([firstname,lastname,street[0],city,country_id,$string(region_id)])),' ',''))"
           }
         },
         {
@@ -2307,7 +2330,7 @@
           "links": [
             {
               "uri": "/V1/customers/17",
-              "method": "PUT",
+              "method": "GET",
               "replyHeaders": {},
               "statusCode": 400,
               "responsePayload": {}
@@ -2335,7 +2358,7 @@
           "links": [
             {
               "uri": "/V1/customers/17",
-              "method": "PUT",
+              "method": "GET",
               "replyHeaders": {},
               "statusCode": 429,
               "responsePayload": {}
@@ -2363,7 +2386,7 @@
           "links": [
             {
               "uri": "/V1/customers/17",
-              "method": "PUT",
+              "method": "GET",
               "replyHeaders": {},
               "statusCode": 500,
               "responsePayload": {}
