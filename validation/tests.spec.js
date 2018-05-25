@@ -85,6 +85,7 @@ if (fs.existsSync('config/channel-settings.json')) {
 
           for (let t = 0; t < docs[i].tests.length; t++) {
             let channelProfile = _.merge(docs[i].tests[t].channelProfile, topChannelProfile);
+            let flowContext = docs[i].tests[t].flowContext;
 
             describe(functionName, () => {
 
@@ -102,7 +103,7 @@ if (fs.existsSync('config/channel-settings.json')) {
 
                   let scope = executeTest(docsFile.unitTestPackage, docs[i].tests[t]);
 
-                  file[functionName](docsFile.ncUtil, channelProfile, null, docs[i].tests[t].payload, (response) => {
+                  file[functionName](docsFile.ncUtil, channelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                     if (scope != null) {
                       assertPackage(scope);
                     }
@@ -117,7 +118,7 @@ if (fs.existsSync('config/channel-settings.json')) {
 
                   let scope = executeTest(docsFile.unitTestPackage, docs[i].tests[t]);
 
-                  file[functionName](docsFile.ncUtil, channelProfile, null, docs[i].tests[t].payload, (response) => {
+                  file[functionName](docsFile.ncUtil, channelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                     if (scope != null) {
                       assertPackage(scope);
                     }
@@ -133,7 +134,7 @@ if (fs.existsSync('config/channel-settings.json')) {
 
                   let scope = executeTest(docsFile.unitTestPackage, docs[i].tests[t]);
 
-                  file[functionName](docsFile.ncUtil, channelProfile, null, docs[i].tests[t].payload, (response) => {
+                  file[functionName](docsFile.ncUtil, channelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                     if (scope != null) {
                       assertPackage(scope);
                     }
@@ -149,7 +150,7 @@ if (fs.existsSync('config/channel-settings.json')) {
 
                   let scope = executeTest(docsFile.unitTestPackage, docs[i].tests[t]);
 
-                  file[functionName](docsFile.ncUtil, channelProfile, null, docs[i].tests[t].payload, (response) => {
+                  file[functionName](docsFile.ncUtil, channelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                     if (scope != null) {
                       assertPackage(scope);
                     }
@@ -165,7 +166,7 @@ if (fs.existsSync('config/channel-settings.json')) {
 
                   let scope = executeTest(docsFile.unitTestPackage, docs[i].tests[t]);
 
-                  file[functionName](docsFile.ncUtil, channelProfile, null, docs[i].tests[t].payload, (response) => {
+                  file[functionName](docsFile.ncUtil, channelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                     if (scope != null) {
                       assertPackage(scope);
                     }
@@ -180,7 +181,7 @@ if (fs.existsSync('config/channel-settings.json')) {
 
                   let scope = executeTest(docsFile.unitTestPackage, docs[i].tests[t], 401);
 
-                  file[functionName](docsFile.ncUtil, channelProfile, null, docs[i].tests[t].payload, (response) => {
+                  file[functionName](docsFile.ncUtil, channelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                     if (scope != null) {
                       assertPackage(scope);
                     }
@@ -194,7 +195,7 @@ if (fs.existsSync('config/channel-settings.json')) {
                 it('It should return 429 our request is denied due to throttling', (done) => {
                   let scope = executeTest(docsFile.unitTestPackage, docs[i].tests[t], 429);
 
-                  file[functionName](docsFile.ncUtil, channelProfile, null, docs[i].tests[t].payload, (response) => {
+                  file[functionName](docsFile.ncUtil, channelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                     if (scope != null) {
                       assertPackage(scope);
                     }
@@ -208,7 +209,7 @@ if (fs.existsSync('config/channel-settings.json')) {
                 it('It should return 500 when the test library returns and error', (done) => {
                   let scope = executeTest(docsFile.unitTestPackage, docs[i].tests[t], 500, true);
 
-                  file[functionName](docsFile.ncUtil, channelProfile, null, docs[i].tests[t].payload, (response) => {
+                  file[functionName](docsFile.ncUtil, channelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                     if (scope != null) {
                       assertPackage(scope);
                     }
@@ -222,7 +223,7 @@ if (fs.existsSync('config/channel-settings.json')) {
                 it('It should return 500 when a server side error occurs', (done) => {
                   let scope = executeTest(docsFile.unitTestPackage, docs[i].tests[t], 500);
 
-                  file[functionName](docsFile.ncUtil, channelProfile, null, docs[i].tests[t].payload, (response) => {
+                  file[functionName](docsFile.ncUtil, channelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                     if (scope != null) {
                       assertPackage(scope);
                     }
@@ -233,7 +234,7 @@ if (fs.existsSync('config/channel-settings.json')) {
               }
 
               it('It should fail with 400 when no docsFile.ncUtil is passed in', (done) => {
-                file[functionName](null, channelProfile, null, docs[i].tests[t].payload, (response) => {
+                file[functionName](null, channelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                   expect(response.ncStatusCode).to.be.equal(400);
                   expect(response.payload).to.be.a('Object');
                   expect(response.payload).to.have.property('error');
@@ -242,7 +243,7 @@ if (fs.existsSync('config/channel-settings.json')) {
               });
 
               it('It should fail with 400 when no channel profile is passed in', (done) => {
-                file[functionName](docsFile.ncUtil, null, null, docs[i].tests[t].payload, (response) => {
+                file[functionName](docsFile.ncUtil, null, flowContext, docs[i].tests[t].payload, (response) => {
                   expect(response.ncStatusCode).to.be.equal(400);
                   expect(response.payload).to.be.a('Object');
                   expect(response.payload).to.have.property('error');
@@ -255,7 +256,7 @@ if (fs.existsSync('config/channel-settings.json')) {
                   channelAuthValues: channelProfile.channelAuthValues,
                   customerBusinessReferences: channelProfile.customerBusinessReferences
                 };
-                file[functionName](docsFile.ncUtil, errChannelProfile, null, docs[i].tests[t].payload, (response) => {
+                file[functionName](docsFile.ncUtil, errChannelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                   expect(response.ncStatusCode).to.be.equal(400);
                   expect(response.payload).to.be.a('Object');
                   expect(response.payload).to.have.property('error');
@@ -269,7 +270,7 @@ if (fs.existsSync('config/channel-settings.json')) {
                   channelAuthValues: channelProfile.channelAuthValues,
                   customerBusinessReferences: channelProfile.customerBusinessReferences
                 };
-                file[functionName](docsFile.ncUtil, errChannelProfile, null, docs[i].tests[t].payload, (response) => {
+                file[functionName](docsFile.ncUtil, errChannelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                   expect(response.ncStatusCode).to.be.equal(400);
                   expect(response.payload).to.be.a('Object');
                   expect(response.payload).to.have.property('error');
@@ -282,7 +283,7 @@ if (fs.existsSync('config/channel-settings.json')) {
                   channelSettingsValues: channelProfile.channelSettingsValues,
                   customerBusinessReferences: channelProfile.customerBusinessReferences
                 };
-                file[functionName](docsFile.ncUtil, errChannelProfile, null, docs[i].tests[t].payload, (response) => {
+                file[functionName](docsFile.ncUtil, errChannelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                   expect(response.ncStatusCode).to.be.equal(400);
                   expect(response.payload).to.be.a('Object');
                   expect(response.payload).to.have.property('error');
@@ -295,7 +296,7 @@ if (fs.existsSync('config/channel-settings.json')) {
                   channelSettingsValues: channelProfile.channelSettingsValues,
                   channelAuthValues: channelProfile.channelAuthValues
                 };
-                file[functionName](docsFile.ncUtil, errChannelProfile, null, docs[i].tests[t].payload, (response) => {
+                file[functionName](docsFile.ncUtil, errChannelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                   expect(response.ncStatusCode).to.be.equal(400);
                   expect(response.payload).to.be.a('Object');
                   expect(response.payload).to.have.property('error');
@@ -309,7 +310,7 @@ if (fs.existsSync('config/channel-settings.json')) {
                   channelSettingsValues: channelProfile.channelSettingsValues,
                   channelAuthValues: channelProfile.channelAuthValues
                 };
-                file[functionName](docsFile.ncUtil, errChannelProfile, null, docs[i].tests[t].payload, (response) => {
+                file[functionName](docsFile.ncUtil, errChannelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                   expect(response.ncStatusCode).to.be.equal(400);
                   expect(response.payload).to.be.a('Object');
                   expect(response.payload).to.have.property('error');
@@ -323,7 +324,7 @@ if (fs.existsSync('config/channel-settings.json')) {
                   channelSettingsValues: channelProfile.channelSettingsValues,
                   channelAuthValues: channelProfile.channelAuthValues
                 };
-                file[functionName](docsFile.ncUtil, errChannelProfile, null, docs[i].tests[t].payload, (response) => {
+                file[functionName](docsFile.ncUtil, errChannelProfile, flowContext, docs[i].tests[t].payload, (response) => {
                   expect(response.ncStatusCode).to.be.equal(400);
                   expect(response.payload).to.be.a('Object');
                   expect(response.payload).to.have.property('error');
@@ -332,7 +333,7 @@ if (fs.existsSync('config/channel-settings.json')) {
               });
 
               it('It should fail with 400 when no payload is passed in', (done) => {
-                file[functionName](docsFile.ncUtil, channelProfile, null, null, (response) => {
+                file[functionName](docsFile.ncUtil, channelProfile, flowContext, null, (response) => {
                   expect(response.ncStatusCode).to.be.equal(400);
                   expect(response.payload).to.be.a('Object');
                   expect(response.payload).to.have.property('error');
@@ -342,7 +343,7 @@ if (fs.existsSync('config/channel-settings.json')) {
 
               it('It should fail with 400 because the payload does not contain a customer', (done) => {
                 let payload = {};
-                file[functionName](docsFile.ncUtil, channelProfile, null, payload, (response) => {
+                file[functionName](docsFile.ncUtil, channelProfile, flowContext, payload, (response) => {
                   expect(response.ncStatusCode).to.be.equal(400);
                   expect(response.payload).to.be.a('Object');
                   expect(response.payload).to.have.property('error');
@@ -351,13 +352,13 @@ if (fs.existsSync('config/channel-settings.json')) {
               });
 
               it('It should throw an exception when no callback is provided', (done) => {
-                expect(() => file[functionName](docsFile.ncUtil, channelProfile, null, docs[i].tests[t].payload, null))
+                expect(() => file[functionName](docsFile.ncUtil, channelProfile, flowContext, docs[i].tests[t].payload, null))
                   .to.throw(Error, 'A callback function was not provided');
                 done();
               });
 
               it('It should throw an exception when the callback is not a function', (done) => {
-                expect(() => file[functionName](docsFile.ncUtil, channelProfile, null, docs[i].tests[t].payload, {}))
+                expect(() => file[functionName](docsFile.ncUtil, channelProfile, flowContext, docs[i].tests[t].payload, {}))
                   .to.throw(TypeError, 'callback is not a function');
                 done();
               });
