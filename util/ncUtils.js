@@ -33,7 +33,7 @@ class Stub {
     this.validatePayload();
 
     if (!isNonEmptyArray(this.messages)) {
-      this.request = require("request-promise-native").defaults({
+      this.request = require("request-promise").defaults({
         auth: {
           bearer: this.channelProfile.channelAuthValues.access_token
         },

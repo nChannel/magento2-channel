@@ -16,7 +16,7 @@
     "jsonata": "^1.5.3",
     "moment": "^2.22.1",
     "request": "^2.85.0",
-    "request-promise-native": "^1.0.5"
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
