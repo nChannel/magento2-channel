@@ -22,6 +22,9 @@
               },
               "qty": {
                 "type": "number"
+              },
+              "sku": {
+                "type": "string"
               }
             }
           }
@@ -72,6 +75,9 @@
               },
               "qty": {
                 "type": "number"
+              },
+              "sku": {
+                "type": "string"
               }
             }
           }

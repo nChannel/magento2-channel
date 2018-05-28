@@ -3,6 +3,8 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
   const stub = new nc.Stub("InsertFulfillment", null, ...arguments);
 
   validateFunction()
+    .then(getOrder)
+    .then(matchLineItems)
     .then(insertInvoice)
     .then(insertShipment)
     .then(buildResponse)
@@ -35,6 +37,44 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
     logInfo("Function is valid.");
   }
 
+  async function getOrder() {
+    return await stub.request.get({
+      url: `/V1/orders/${stub.payload.salesOrderRemoteID}`
+    });
+  }
+
+  async function matchLineItems(getOrderResponse) {
+    const order = getOrderResponse.body;
+
+    if (nc.isNonEmptyObject(stub.payload.doc.invoice) && nc.isNonEmptyArray(stub.payload.doc.invoice.items)) {
+      stub.payload.doc.invoice.items.forEach(item => {
+        if (nc.isNonEmptyString(item.sku)) {
+          const orderItem = order.items.find(i => i.sku === item.sku);
+          if (orderItem != null) {
+            item.orderItemId = orderItem.item_id;
+            delete item.sku;
+          } else {
+            throw new Error(`Order ${order.entity_id} does not have a line item matching invoice sku ${item.sku}.`);
+          }
+        }
+      });
+    }
+
+    if (nc.isNonEmptyObject(stub.payload.doc.ship) && nc.isNonEmptyArray(stub.payload.doc.ship.items)) {
+      stub.payload.doc.ship.items.forEach(item => {
+        if (nc.isNonEmptyString(item.sku)) {
+          const orderItem = order.items.find(i => i.sku === item.sku);
+          if (orderItem != null) {
+            item.orderItemId = orderItem.item_id;
+            delete item.sku;
+          } else {
+            throw new Error(`Order ${order.entity_id} does not have a line item matching ship sku ${item.sku}.`);
+          }
+        }
+      });
+    }
+  }
+
   async function insertInvoice() {
     if (stub.flowContext && stub.flowContext.doInvoice) {
       logInfo("Inserting new invoice record...");
@@ -57,8 +97,8 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
     } catch (error) {
       if (stub.flowContext && stub.flowContext.doInvoice) {
         if (error.statusCode >= 500 || error.statusCode === 429) {
-          // Force statusCode to 400 to prevent unwanted retries.
-          error.statusCode = 400; // We do not want to retry because it could result in duplicate invoices or payments.
+          // Force statusCode to 400 if we have already completed invoice successfully to prevent unwanted retries.
+          stub.out.ncStatusCode = 400; // Retrying could result in duplicate invoices and/or captured payments.
           logError("The invoice was inserted successfully, but the shipment insertion has failed.");
         }
       }
@@ -69,8 +109,8 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
   async function buildResponse(response) {
     stub.out.response.endpointStatusCode = response.statusCode;
     stub.out.ncStatusCode = 201;
-    stub.out.payload.fulfillmentRemoteID = response.body.entity_id;
-    stub.out.payload.salesOrderRemoteID = response.body.order_id;
+    stub.out.payload.fulfillmentRemoteID = response.body;
+    stub.out.payload.salesOrderRemoteID = stub.payload.salesOrderRemoteID;
   }
 
   async function handleError(error) {
@@ -79,12 +119,12 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
       stub.out.response.endpointStatusCode = error.statusCode;
       stub.out.response.endpointStatusMessage = error.message;
       if (error.statusCode >= 500) {
-        stub.out.ncStatusCode = 500;
+        stub.out.ncStatusCode = stub.out.ncStatusCode || 500;
       } else if (error.statusCode === 429) {
         logWarn("Request was throttled.");
-        stub.out.ncStatusCode = 429;
+        stub.out.ncStatusCode = stub.out.ncStatusCode || 429;
       } else {
-        stub.out.ncStatusCode = 400;
+        stub.out.ncStatusCode = stub.out.ncStatusCode || 400;
       }
     }
     stub.out.payload.error = error;

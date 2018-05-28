@@ -1869,6 +1869,38 @@
           "defaultHeaders": {},
           "links": [
             {
+              "uri": "/V1/orders/10",
+              "method": "GET",
+              "replyHeaders": {},
+              "statusCode": 200,
+              "responsePayload": {
+                "entity_id": 10,
+                "increment_id": "000000007",
+                "state": "processing",
+                "status": "processing",
+                "store_id": 1,
+                "total_item_count": 1,
+                "total_qty_ordered": 1,
+                "items": [
+                  {
+                    "item_id": 10,
+                    "order_id": 10,
+                    "product_id": 2044,
+                    "product_type": "simple",
+                    "qty_canceled": 0,
+                    "qty_invoiced": 0,
+                    "qty_ordered": 1,
+                    "qty_refunded": 0,
+                    "qty_shipped": 0,
+                    "quote_item_id": 4,
+                    "row_invoiced": 0,
+                    "sku": "WSH12-32-Red",
+                    "store_id": 1
+                  }
+                ]
+              }
+            },
+            {
               "uri": "/V1/order/10/ship",
               "method": "POST",
               "replyHeaders": {},
@@ -1901,8 +1933,8 @@
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/V1/order/10/ship",
-              "method": "POST",
+              "uri": "/V1/orders/10",
+              "method": "GET",
               "replyHeaders": {},
               "statusCode": 400,
               "responsePayload": {}
@@ -1933,8 +1965,8 @@
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/V1/order/10/ship",
-              "method": "POST",
+              "uri": "/V1/orders/10",
+              "method": "GET",
               "replyHeaders": {},
               "statusCode": 429,
               "responsePayload": {}
@@ -1965,8 +1997,8 @@
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/V1/order/10/ship",
-              "method": "POST",
+              "uri": "/V1/orders/10",
+              "method": "GET",
               "replyHeaders": {},
               "statusCode": 500,
               "responsePayload": {}
