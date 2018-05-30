@@ -42,14 +42,10 @@
           "canUpdateFulfillmentFlag": false,
           "doInsertInvoice": true
         },
-        "configView": ["canUpdateFulfillmentFlag", "doInsertInvoice"],
+        "configView": ["doInsertInvoice"],
         "configModel": {
-          "required": ["canUpdateFulfillmentFlag", "doInsertInvoice"],
+          "required": ["doInsertInvoice"],
           "properties": {
-            "canUpdateFulfillmentFlag": {
-              "type": "boolean",
-              "title": "PUT Fulfillment, canUpdateFulfillmentFlag"
-            },
             "doInsertInvoice": {
               "type": "boolean",
               "title": "PUT Fulfillment, doInsertInvoice"
@@ -76,18 +72,6 @@
         "configModel": {
           "type": "object",
           "properties": {
-            "canUpdateCustomerFlag": {
-              "title": "PUT Customer, canUpdateCustomerFlag",
-              "type": "boolean"
-            },
-            "canUpdateCustomerAddressFlag": {
-              "title": "PUT Customer, canUpdateCustomerAddressFlag",
-              "type": "boolean"
-            },
-            "canUpdateCustomerContactFlag": {
-              "title": "PUT Customer, canUpdateCustomerContactFlag",
-              "type": "boolean"
-            },
             "doPutCustomerAddressesFlag": {
               "title": "PUT Customer, doPutCustomerAddressesFlag",
               "type": "boolean"
@@ -107,9 +91,6 @@
             }
           },
           "required": [
-            "canUpdateCustomerFlag",
-            "canUpdateCustomerAddressFlag",
-            "canUpdateCustomerContactFlag",
             "doPutCustomerAddressesFlag",
             "doPutCustomerContactsFlag",
             "addressUpdateMethod",
@@ -117,9 +98,6 @@
           ]
         },
         "configView": [
-          "canUpdateCustomerFlag",
-          "canUpdateCustomerAddressFlag",
-          "canUpdateCustomerContactFlag",
           "doPutCustomerAddressesFlag",
           "doPutCustomerContactsFlag",
           "addressUpdateMethod",
@@ -195,7 +173,7 @@
     }
   },
   "channelAuthSchema": {
-    "authType": "Token",
+    "authType": "generic",
     "configDef": {
       "configModel": {
         "type": "object",
