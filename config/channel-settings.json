@@ -1,283 +1,12 @@
 {
-  "name": "Template Name",
-  "description": "Template Registry",
-  "channelIcon": "<base64 image>",
+  "name": "Magento 2.0",
+  "description": "Magento 2.0 Registry",
+  "channelIcon":
+    "data:image/png;base64,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",
   "definitionFolderName": " ",
-  "retailClasses": [
-    "eCommerce"
-  ],
-  "orderProcessingRoles": [
-    "Sales","Fulfillment"
-  ],
+  "retailClasses": ["eCommerce"],
+  "orderProcessingRoles": ["Sales"],
   "channelActionRegistries": [
-    {
-      "name": "GET PRODUCTGROUP",
-      "description": "GET PRODUCTGROUP",
-      "channelVerb": "GET",
-      "channelNoun": "PRODUCTGROUP",
-      "ruleDef": {
-        "ruleSchema": {},
-        "defaultRuleValues": {}
-      },
-      "configDef": {
-        "configModel": {},
-        "configView": [],
-        "configValues": {}
-      },
-      "documentDef": {
-        "schema": {},
-        "referenceLocation": {"productGroupBusinessReferences": [""]}
-      }
-    },
-    {
-      "name": "PUT PRODUCTGROUP",
-      "description": "PUT PRODUCTGROUP",
-      "channelVerb": "PUT",
-      "channelNoun": "PRODUCTGROUP",
-      "ruleDef": {
-        "ruleSchema": {},
-        "defaultRuleValues": {}
-      },
-      "configDef": {
-        "configValues" : {
-          "doPutProductPricingFlag": false,
-          "doPutProductQuantityFlag": false,
-          "doPutProductFlag": false,
-          "canUpdateProductPricingFlag": false,
-          "canUpdateProductQuantityFlag": false,
-          "canUpdateProductFlag": false,
-          "canUpdateProductGroupFlag" : true
-        },
-        "configView" : [
-          "canUpdateProductGroupFlag"
-        ],
-        "configModel" : {
-          "required" : [
-            "doPutProductPricingFlag",
-            "doPutProductQuantityFlag",
-            "doPutProductFlag",
-            "canUpdateProductPricingFlag",
-            "canUpdateProductQuantityFlag",
-            "canUpdateProductFlag",
-            "canUpdateProductGroupFlag"
-          ],
-          "properties" : {
-            "doPutProductPricingFlag" : {
-              "type" : "boolean",
-              "title" : "PUT Product, doPutProductPricingFlag"
-            },
-            "doPutProductQuantityFlag" : {
-              "type" : "boolean",
-              "title" : "PUT Product, doPutProductQuantityFlag"
-            },
-            "doPutProductFlag" : {
-              "type" : "boolean",
-              "title" : "PUT ProductGroup, doPutProductFlag"
-            },
-            "canUpdateProductPricingFlag" : {
-              "type" : "boolean",
-              "title" : "PUT Product, canUpdateProductPricingFlag"
-            },
-            "canUpdateProductQuantityFlag" : {
-              "type" : "boolean",
-              "title" : "PUT Product, canUpdateProductQuantityFlag"
-            },
-            "canUpdateProductFlag" : {
-              "type" : "boolean",
-              "title" : "PUT ProductGroup, canUpdateProductFlag"
-            },
-            "canUpdateProductGroupFlag" : {
-              "type" : "boolean",
-              "title" : "PUT ProductGroup, canUpdateProductGroupFlag"
-            }
-          },
-          "type" : "object"
-        }
-      },
-      "documentDef": {
-        "schema": {},
-        "referenceLocation": {"productGroupBusinessReferences": [""]}
-      }
-    },
-    {
-      "name": "GET PRODUCT",
-      "description": "GET PRODUCT",
-      "channelVerb": "GET",
-      "channelNoun": "PRODUCT",
-      "ruleDef": {
-        "ruleSchema": {},
-        "defaultRuleValues": {}
-      },
-      "configDef": {
-        "configModel": {},
-        "configView": [],
-        "configValues": {}
-      },
-      "documentDef": {
-        "schema": {},
-        "referenceLocation": {"productBusinessReferences": [""]}
-      }
-    },
-    {
-      "name": "PUT PRODUCT",
-      "description": "PUT PRODUCT",
-      "channelVerb": "PUT",
-      "channelNoun": "PRODUCT",
-      "ruleDef": {
-        "ruleSchema": {},
-        "defaultRuleValues": {}
-      },
-      "configDef": {
-        "configValues" : {
-          "doPutProductPricingFlag": false,
-          "doPutProductQuantityFlag": false,
-          "canUpdateProductPricingFlag": false,
-          "canUpdateProductQuantityFlag": false,
-          "canUpdateProductFlag": true
-        },
-        "configView" : [
-          "canUpdateProductFlag"
-        ],
-        "configModel" : {
-          "required" : [
-            "doPutProductPricingFlag",
-            "doPutProductQuantityFlag",
-            "canUpdateProductPricingFlag",
-            "canUpdateProductQuantityFlag",
-            "canUpdateProductFlag"
-          ],
-          "properties" : {
-            "doPutProductPricingFlag" : {
-              "type" : "boolean",
-              "title" : "PUT Product, doPutProductPricingFlag"
-            },
-            "doPutProductQuantityFlag" : {
-              "type" : "boolean",
-              "title" : "PUT Product, doPutProductQuantityFlag"
-            },
-            "canUpdateProductPricingFlag" : {
-              "type" : "boolean",
-              "title" : "PUT Product, canUpdateProductPricingFlag"
-            },
-            "canUpdateProductQuantityFlag" : {
-              "type" : "boolean",
-              "title" : "PUT Product, canUpdateProductQuantityFlag"
-            },
-            "canUpdateProductFlag" : {
-              "type" : "boolean",
-              "title" : "PUT Product, canUpdateProductFlag"
-            }
-          },
-          "type" : "object"
-        }
-      },
-      "documentDef": {
-        "schema": {},
-        "referenceLocation": {"productBusinessReferences": [""]}
-      }
-    },
-    {
-      "name": "GET PRODUCTPRICING",
-      "description": "GET PRODUCTPRICING",
-      "channelVerb": "GET",
-      "channelNoun": "PRODUCTPRICING",
-      "ruleDef": {
-        "ruleSchema": {},
-        "defaultRuleValues": {}
-      },
-      "configDef": {
-        "configModel": {},
-        "configView": [],
-        "configValues": {}
-      },
-      "documentDef": {
-        "schema": {},
-        "referenceLocation": {"productPricingBusinessReferences": [""]}
-      }
-    },
-    {
-      "name": "PUT PRODUCTPRICING",
-      "description": "PUT PRODUCTPRICING",
-      "channelVerb": "PUT",
-      "channelNoun": "PRODUCTPRICING",
-      "ruleDef": {
-        "ruleSchema": {},
-        "defaultRuleValues": {}
-      },
-      "configDef": {
-        "configValues" : {
-          "canUpdateProductPricingFlag": true
-        },
-        "configView" : [],
-        "configModel" : {
-          "required" : [
-            "canUpdateProductPricingFlag"
-          ],
-          "properties" : {
-            "canUpdateProductPricingFlag" : {
-              "type" : "boolean",
-              "title" : "PUT ProductPricing, canUpdateProductPricingFlag"
-            }
-          },
-          "type" : "object"
-        }
-      },
-      "documentDef": {
-        "schema": {},
-        "referenceLocation": {"productPricingBusinessReferences": [""]}
-      }
-    },
-    {
-      "name": "GET PRODUCTQUANTITY",
-      "description": "GET PRODUCTQUANTITY",
-      "channelVerb": "GET",
-      "channelNoun": "PRODUCTQUANTITY",
-      "ruleDef": {
-        "ruleSchema": {},
-        "defaultRuleValues": {}
-      },
-      "configDef": {
-        "configModel": {},
-        "configView": [],
-        "configValues": {}
-      },
-      "documentDef": {
-        "schema": {},
-        "referenceLocation": {"productQuantityBusinessReferences": [""]}
-      }
-    },
-    {
-      "name": "PUT PRODUCTQUANTITY",
-      "description": "PUT PRODUCTQUANTITY",
-      "channelVerb": "PUT",
-      "channelNoun": "PRODUCTQUANTITY",
-      "ruleDef": {
-        "ruleSchema": {},
-        "defaultRuleValues": {}
-      },
-      "configDef": {
-        "configValues" : {
-          "canUpdateProductQuantityFlag": true
-        },
-        "configView" : [],
-        "configModel" : {
-          "required" : [
-            "canUpdateProductQuantityFlag"
-          ],
-          "properties" : {
-            "canUpdateProductQuantityFlag" : {
-              "type" : "boolean",
-              "title" : "PUT ProductQuantity, canUpdateProductQuantityFlag"
-            }
-          },
-          "type" : "object"
-        }
-      },
-      "documentDef": {
-        "schema": {},
-        "referenceLocation": {"productQuantityBusinessReferences": [""]}
-      }
-    },
     {
       "name": "GET SALESORDER",
       "description": "GET SALESORDER",
@@ -294,41 +23,9 @@
       },
       "documentDef": {
         "schema": {},
-        "referenceLocation": {"salesOrderBusinessReferences": [""]}
-      }
-    },
-    {
-      "channelNoun" : "SALESORDER",
-      "channelVerb" : "PUT",
-      "description" : "PUT SALESORDER",
-      "name" : "PUT SALESORDER",
-      "configDef" : {
-        "configValues" : {
-          "canUpdateOrderFlag" : false
-        },
-        "configView" : [
-          "canUpdateOrderFlag"
-        ],
-        "configModel" : {
-          "required" : [
-            "canUpdateOrderFlag"
-          ],
-          "properties" : {
-            "canUpdateOrderFlag" : {
-              "type" : "boolean",
-              "title" : "PUT Order, canUpdateOrderFlag"
-            }
-          },
-          "type" : "object"
+        "referenceLocation": {
+          "salesOrderBusinessReferences": ["increment_id"]
         }
-      },
-      "ruleDef" : {
-        "defaultRuleValues" : {},
-        "ruleSchema" : {}
-      },
-      "documentDef" : {
-        "schema": {},
-        "referenceLocation": {"salesOrderBusinessReferences": [""]}
       }
     },
     {
@@ -341,20 +38,17 @@
         "defaultRuleValues": {}
       },
       "configDef": {
-        "configValues" : {
-          "canUpdateFulfillmentFlag" : true
+        "configValues": {
+          "canUpdateFulfillmentFlag": false,
+          "doInsertInvoice": true
         },
-        "configView" : [
-          "canUpdateFulfillmentFlag"
-        ],
-        "configModel" : {
-          "required": [
-            "canUpdateFulfillmentFlag"
-          ],
+        "configView": ["doInsertInvoice"],
+        "configModel": {
+          "required": ["doInsertInvoice"],
           "properties": {
-            "canUpdateFulfillmentFlag": {
+            "doInsertInvoice": {
               "type": "boolean",
-              "title": "PUT Fulfillment, canUpdateFulfillmentFlag"
+              "title": "PUT Fulfillment, doInsertInvoice"
             }
           },
           "type": "object"
@@ -362,29 +56,7 @@
       },
       "documentDef": {
         "schema": {},
-        "referenceLocation": {
-          "fulfillmentBusinessReferences": [""],
-          "salesOrderBusinessReferences": [""]
-        }
-      }
-    },
-    {
-      "name": "GET CUSTOMER",
-      "description": "GET CUSTOMER",
-      "channelVerb": "GET",
-      "channelNoun": "CUSTOMER",
-      "ruleDef": {
-        "ruleSchema": {},
-        "defaultRuleValues": {}
-      },
-      "configDef": {
-        "configModel": {},
-        "configView": [],
-        "configValues": {}
-      },
-      "documentDef": {
-        "schema": {},
-        "referenceLocation": {"customerBusinessReferences": ["", ""]}
+        "referenceLocation": {}
       }
     },
     {
@@ -396,111 +68,57 @@
         "ruleSchema": {},
         "defaultRuleValues": {}
       },
-      "configDef" : {
-        "configModel" : {
-          "type" : "object",
-          "properties" : {
-            "canUpdateCustomerFlag" : {
-              "title" : "PUT Customer, canUpdateCustomerFlag",
-              "type" : "boolean"
-            }
-          },
-          "required" : [
-            "canUpdateCustomerFlag"
-          ]
-        },
-        "configView" : [
-          "canUpdateCustomerFlag"
-        ],
-        "configValues" : {
-          "canUpdateCustomerFlag": true
-        }
-      },
-      "documentDef": {
-        "schema": {},
-        "referenceLocation": {"customerBusinessReferences": ["", ""]}
-      }
-    },
-    {
-      "name": "PUT CUSTOMERADDRESS",
-      "description": "PUT CUSTOMERADDRESS",
-      "channelVerb": "PUT",
-      "channelNoun": "CUSTOMERADDRESS",
-      "ruleDef": {
-        "ruleSchema": {},
-        "defaultRuleValues": {}
-      },
       "configDef": {
         "configModel": {
           "type": "object",
           "properties": {
             "doPutCustomerAddressesFlag": {
-              "title": "PUT Customer Address, doPutCustomerAddressesFlag",
+              "title": "PUT Customer, doPutCustomerAddressesFlag",
               "type": "boolean"
             },
-            "canUpdateCustomerAddressFlag": {
-              "title": "Update Customer Address, canUpdateCustomerAddressFlag",
+            "doPutCustomerContactsFlag": {
+              "title": "PUT Customer, doPutCustomerContactsFlag",
               "type": "boolean"
+            },
+            "addressUpdateMethod": {
+              "title": "PUT Customer, addressUpdateMethod",
+              "type": "string",
+              "enum": ["append", "merge", "replace"]
+            },
+            "addressMatchingExpression": {
+              "title": "PUT Customer, addressMatchingExpression",
+              "type": "string"
             }
           },
           "required": [
             "doPutCustomerAddressesFlag",
-            "canUpdateCustomerAddressFlag"
+            "doPutCustomerContactsFlag",
+            "addressUpdateMethod",
+            "addressMatchingExpression"
           ]
         },
         "configView": [
           "doPutCustomerAddressesFlag",
-          "canUpdateCustomerAddressFlag"
-        ],
-        "configValues": {
-          "doPutCustomerAddressesFlag": true,
-          "canUpdateCustomerAddressFlag": true
-        }
-      },
-      "documentDef": {
-        "schema": {},
-        "referenceLocation": {}
-      }
-    },
-    {
-      "name": "PUT CUSTOMERCONTACT",
-      "description": "PUT CUSTOMERCONTACT",
-      "channelVerb": "PUT",
-      "channelNoun": "CUSTOMERCONTACT",
-      "ruleDef": {
-        "ruleSchema": {},
-        "defaultRuleValues": {}
-      },
-      "configDef": {
-        "configModel": {
-          "type": "object",
-          "properties": {
-            "doPutCustomerContactsFlag": {
-              "title": "PUT Customer Contacts, doPutCustomerContactsFlag",
-              "type": "boolean"
-            },
-            "canUpdateCustomerContactFlag": {
-              "title": "Update Customer Contacts, canUpdateCustomerContactFlag",
-              "type": "boolean"
-            }
-          },
-          "required": [
-            "doPutCustomerContactsFlag",
-            "canUpdateCustomerContactFlag"
-          ]
-        },
-        "configView": [
           "doPutCustomerContactsFlag",
-          "canUpdateCustomerContactFlag"
+          "addressUpdateMethod",
+          "addressMatchingExpression"
         ],
         "configValues": {
+          "canUpdateCustomerFlag": true,
+          "canUpdateCustomerAddressFlag": false,
+          "canUpdateCustomerContactFlag": false,
+          "doPutCustomerAddressesFlag": false,
           "doPutCustomerContactsFlag": false,
-          "canUpdateCustomerContactFlag": false
+          "addressUpdateMethod": "merge",
+          "addressMatchingExpression":
+            "$lowercase($replace($trim($join([firstname,lastname,street[0],city,country_id,$string(region_id)])),' ',''))"
         }
       },
       "documentDef": {
         "schema": {},
-        "referenceLocation": {}
+        "referenceLocation": {
+          "customerBusinessReferences": ["email"]
+        }
       }
     }
   ],
@@ -508,10 +126,18 @@
     "configDef": {
       "configModel": {
         "type": "object",
-        "title": "Template Channel Settings",
+        "title": "Magento 2.0 Channel Settings",
         "properties": {
           "protocol": {
             "title": "Protocol",
+            "type": "string"
+          },
+          "store_base_url": {
+            "title": "Store Base URL",
+            "type": "string"
+          },
+          "store_code": {
+            "title": "Store Code",
             "type": "string"
           },
           "implFolderName": {
@@ -519,15 +145,30 @@
             "type": "string"
           }
         },
-        "required": [
-          "protocol",
-          "implFolderName"
-        ]
+        "required": ["protocol", "store_base_url", "implFolderName"]
       },
-      "configView": [],
+      "configView": [
+        {
+          "key": "protocol",
+          "title": "Protocol"
+        },
+        {
+          "key": "store_base_url",
+          "title": "Store Base URL"
+        },
+        {
+          "key": "store_code",
+          "title": "Store Code"
+        },
+        {
+          "key": "implFolderName",
+          "title": "Implementation Folder Name"
+        }
+      ],
+
       "configValues": {
         "protocol": "https",
-        "implFolderName": "nav"
+        "implFolderName": "magento2-channel"
       }
     }
   },
@@ -538,20 +179,30 @@
         "type": "object",
         "title": "Credentials Config",
         "properties": {
-          "account": {
-            "title": "Account Number",
+          "consumer_key": {
+            "title": "Consumer Key",
+            "type": "string"
+          },
+          "consumer_secret": {
+            "title": "Consumer Secret",
+            "type": "string"
+          },
+          "access_token": {
+            "title": "Access Token",
+            "type": "string"
+          },
+          "access_token_secret": {
+            "title": "Access Token Secret",
             "type": "string"
           }
         },
-        "required": [
-          "account"
-        ]
+        "required": ["access_token"]
       },
       "configView": [
-				{
-					"key": "account",
-					"title": "Account Number"
-				}
+        {
+          "key": "access_token",
+          "title": "Access Token"
+        }
       ],
       "configValues": {}
     }

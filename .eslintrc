@@ -1,0 +1,38 @@
+{
+    "root": true,
+    "extends": [
+        "eslint:recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:node/recommended",
+        "plugin:promise/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "rules": {
+        "curly": ["error", "all"],
+        "max-len": ["error", {
+            "code": 120,
+            "ignoreUrls": true
+        }],
+        "no-confusing-arrow": "error",
+        "no-mixed-operators": "error",
+        "no-tabs": "error",
+        "no-unexpected-multiline": "error"
+    },
+    "plugins": [
+        "import",
+        "node",
+        "promise",
+        "prettier"
+    ],
+    "env": {
+        "node": true,
+        "commonjs": true,
+        "es6": true,
+        "mocha": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "sourceType": "module"
+    }
+}

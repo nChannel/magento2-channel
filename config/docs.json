@@ -5,7 +5,14 @@
     "logger": null
   },
   "channelProfile": {
-    "channelAuthValues": {}
+    "channelAuthValues": {
+      "access_token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "channelSettingsValues": {
+      "protocol": "https",
+      "store_base_url": "example.com",
+      "store_code": "default"
+    }
   },
   "docs": [
     {
@@ -14,23 +21,31 @@
         {
           "ncStatusCode": 200,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@example.com",
+                "firstname": "unique",
+                "lastname": "exists"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/customers/search?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=email&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=test%40example.com&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1&fields=total_count%2Csearch_criteria%2Citems%5Bid%2Cemail%5D",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "customers": [
+                "items": [
                   {
-                    "id": 1073339459,
-                    "email": "derek.boytim@nchannel.com"
+                    "id": 11,
+                    "email": "test@example.com"
                   }
-                ]
+                ],
+                "total_count": 1
               }
             }
           ],
@@ -43,20 +58,24 @@
           "payload": {
             "doc": {
               "customer": {
-                "email": "derek.boytim@nchannel.com"
+                "email": "test@example.com",
+                "firstname": "doesNot",
+                "lastname": "exist"
               }
             }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/customers/search?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=email&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=test%40example.com&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1&fields=total_count%2Csearch_criteria%2Citems%5Bid%2Cemail%5D",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "customers": []
+                "items": null,
+                "total_count": 0
               }
             }
           ],
@@ -67,27 +86,35 @@
         {
           "ncStatusCode": 409,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@example.com",
+                "firstname": "multiple",
+                "lastname": "matches"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/customers/search?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=email&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=test%40example.com&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1&fields=total_count%2Csearch_criteria%2Citems%5Bid%2Cemail%5D",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "customers": [
+                "items": [
                   {
-                    "id": 1073339459,
-                    "email": "derek.boytim@nchannel.com"
+                    "id": 11,
+                    "email": "test@example.com"
                   },
                   {
-                    "id": 1073339459,
-                    "email": "derek.boytim@nchannel.com"
+                    "id": 12,
+                    "email": "test@example.com"
                   }
-                ]
+                ],
+                "total_count": 2
               }
             }
           ],
@@ -98,19 +125,24 @@
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@example.com",
+                "firstname": "not",
+                "lastname": "authorized"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/customers/search?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=email&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=test%40example.com&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1&fields=total_count%2Csearch_criteria%2Citems%5Bid%2Cemail%5D",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 401,
-              "responsePayload": {
-                "customers": []
-              }
+              "responsePayload": {}
             }
           ],
           "channelProfile": {
@@ -120,19 +152,24 @@
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@example.com",
+                "firstname": "tooMany",
+                "lastname": "requests"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/customers/search?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=email&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=test%40example.com&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1&fields=total_count%2Csearch_criteria%2Citems%5Bid%2Cemail%5D",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 429,
-              "responsePayload": {
-                "customers": []
-              }
+              "responsePayload": {}
             }
           ],
           "channelProfile": {
@@ -142,19 +179,24 @@
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@example.com",
+                "firstname": "server",
+                "lastname": "error"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/customers/search?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=email&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=test%40example.com&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1&fields=total_count%2Csearch_criteria%2Citems%5Bid%2Cemail%5D",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 500,
-              "responsePayload": {
-                "customers": []
-              }
+              "responsePayload": {}
             }
           ],
           "channelProfile": {
@@ -836,9 +878,7 @@
           "ncStatusCode": 200,
           "payload": {
             "doc": {
-              "Addresses": [
-                {}
-              ]
+              "Addresses": [{}]
             }
           },
           "baseUri": "https://localhost",
@@ -869,9 +909,7 @@
           "ncStatusCode": 200,
           "payload": {
             "doc": {
-              "ContactMethods": [
-                {}
-              ]
+              "ContactMethods": [{}]
             }
           },
           "baseUri": "https://localhost",
@@ -1438,146 +1476,249 @@
         {
           "ncStatusCode": 200,
           "payload": {
-            "doc": {}
+            "doc": {
+              "modifiedDateRange": {
+                "startDateGMT": "2018-05-01T12:12:12.121Z",
+                "endDateGMT": "2018-05-02T12:12:12.121Z"
+              },
+              "pageSize": 10,
+              "page": 1
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/orders?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=updated_at&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=2018-05-01T12%3A12%3A12.121Z&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=gteq&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=updated_at&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=2018-05-02T12%3A12%3A12.121Z&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=lteq&search_criteria%5Bpage_size%5D=10&search_criteria%5Bcurrent_page%5D=1",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "orders": [
+                "items": [
                   {
-                    "id": 1073339459
+                    "entity_id": 10,
+                    "increment_id": "000000007",
+                    "customer_id": 16,
+                    "state": "new",
+                    "status": "pending",
+                    "store_id": 1,
+                    "items": [
+                      {
+                        "item_id": 10,
+                        "order_id": 10,
+                        "product_id": 2044,
+                        "product_type": "simple",
+                        "qty_ordered": 1,
+                        "sku": "WSH12-32-Red",
+                        "weight": 1
+                      }
+                    ]
                   }
-                ]
+                ],
+                "search_criteria": {
+                  "page_size": 10,
+                  "current_page": 1
+                },
+                "total_count": 1
               }
             }
           ],
           "channelProfile": {
-            "salesOrderBusinessReferences": ["orderid"]
+            "salesOrderBusinessReferences": ["increment_id"]
           }
         },
         {
           "ncStatusCode": 204,
           "payload": {
-            "doc": {}
+            "doc": {
+              "modifiedDateRange": {
+                "startDateGMT": "2018-05-01T12:12:12.121Z",
+                "endDateGMT": "2018-05-02T12:12:12.121Z"
+              },
+              "pageSize": 10,
+              "page": 1
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/orders?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=updated_at&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=2018-05-01T12%3A12%3A12.121Z&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=gteq&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=updated_at&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=2018-05-02T12%3A12%3A12.121Z&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=lteq&search_criteria%5Bpage_size%5D=10&search_criteria%5Bcurrent_page%5D=1",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "orders": []
+                "items": [],
+                "search_criteria": {
+                  "page_size": 10,
+                  "current_page": 1
+                },
+                "total_count": 0
               }
             }
           ],
           "channelProfile": {
-            "salesOrderBusinessReferences": ["orderid"]
+            "salesOrderBusinessReferences": ["increment_id"]
           }
         },
         {
           "ncStatusCode": 206,
           "payload": {
             "doc": {
-              "pageSize": 2
+              "modifiedDateRange": {
+                "startDateGMT": "2018-05-01T12:12:12.121Z",
+                "endDateGMT": "2018-05-02T12:12:12.121Z"
+              },
+              "pageSize": 2,
+              "page": 1
             }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/orders?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=updated_at&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=2018-05-01T12%3A12%3A12.121Z&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=gteq&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=updated_at&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=2018-05-02T12%3A12%3A12.121Z&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=lteq&search_criteria%5Bpage_size%5D=2&search_criteria%5Bcurrent_page%5D=1",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "orders": [
+                "items": [
                   {
-                    "id": 1073339459
+                    "entity_id": 10,
+                    "increment_id": "000000007",
+                    "customer_id": 16,
+                    "state": "new",
+                    "status": "pending",
+                    "store_id": 1,
+                    "items": [
+                      {
+                        "item_id": 10,
+                        "order_id": 10,
+                        "product_id": 2044,
+                        "product_type": "simple",
+                        "qty_ordered": 1,
+                        "sku": "WSH12-32-Red",
+                        "weight": 1
+                      }
+                    ]
                   },
                   {
-                    "id": 1073339459
+                    "entity_id": 10,
+                    "increment_id": "000000007",
+                    "customer_id": 16,
+                    "state": "new",
+                    "status": "pending",
+                    "store_id": 1,
+                    "items": [
+                      {
+                        "item_id": 10,
+                        "order_id": 10,
+                        "product_id": 2044,
+                        "product_type": "simple",
+                        "qty_ordered": 1,
+                        "sku": "WSH12-32-Red",
+                        "weight": 1
+                      }
+                    ]
                   }
-                ]
+                ],
+                "search_criteria": {
+                  "page_size": 2,
+                  "current_page": 1
+                },
+                "total_count": 3
               }
             }
           ],
           "channelProfile": {
-            "salesOrderBusinessReferences": ["orderid"]
+            "salesOrderBusinessReferences": ["increment_id"]
           }
         },
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": {
+              "modifiedDateRange": {
+                "startDateGMT": "2018-05-01T12:12:12.121Z",
+                "endDateGMT": "2018-05-02T12:12:12.121Z"
+              },
+              "pageSize": 10,
+              "page": 1
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/orders?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=updated_at&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=2018-05-01T12%3A12%3A12.121Z&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=gteq&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=updated_at&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=2018-05-02T12%3A12%3A12.121Z&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=lteq&search_criteria%5Bpage_size%5D=10&search_criteria%5Bcurrent_page%5D=1",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 401,
-              "responsePayload": {
-                "orders": []
-              }
+              "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "salesOrderBusinessReferences": ["orderid"]
+            "salesOrderBusinessReferences": ["increment_id"]
           }
         },
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": {
+              "modifiedDateRange": {
+                "startDateGMT": "2018-05-01T12:12:12.121Z",
+                "endDateGMT": "2018-05-02T12:12:12.121Z"
+              },
+              "pageSize": 10,
+              "page": 1
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/orders?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=updated_at&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=2018-05-01T12%3A12%3A12.121Z&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=gteq&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=updated_at&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=2018-05-02T12%3A12%3A12.121Z&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=lteq&search_criteria%5Bpage_size%5D=10&search_criteria%5Bcurrent_page%5D=1",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 429,
-              "responsePayload": {
-                "orders": []
-              }
+              "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "salesOrderBusinessReferences": ["orderid"]
+            "salesOrderBusinessReferences": ["increment_id"]
           }
         },
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": {
+              "modifiedDateRange": {
+                "startDateGMT": "2018-05-01T12:12:12.121Z",
+                "endDateGMT": "2018-05-02T12:12:12.121Z"
+              },
+              "pageSize": 10,
+              "page": 1
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri":
+                "/V1/orders?search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=updated_at&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=2018-05-01T12%3A12%3A12.121Z&search_criteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=gteq&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=updated_at&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=2018-05-02T12%3A12%3A12.121Z&search_criteria%5Bfilter_groups%5D%5B1%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=lteq&search_criteria%5Bpage_size%5D=10&search_criteria%5Bcurrent_page%5D=1",
               "method": "GET",
               "replyHeaders": {},
               "statusCode": 500,
-              "responsePayload": {
-                "orders": []
-              }
+              "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "salesOrderBusinessReferences": ["orderid"]
+            "salesOrderBusinessReferences": ["increment_id"]
           }
         }
       ]
@@ -1588,21 +1729,35 @@
         {
           "ncStatusCode": 201,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@test.com",
+                "firstname": "test",
+                "lastname": "test"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/customers",
               "method": "POST",
               "replyHeaders": {},
-              "statusCode": 201,
+              "statusCode": 200,
               "responsePayload": {
-                "customer": {
-                  "id": 1073339459,
-                  "email": "derek.boytim@nchannel.com"
-                }
+                "id": 17,
+                "group_id": 1,
+                "created_at": "2018-05-24 02:05:47",
+                "updated_at": "2018-05-24 02:05:47",
+                "created_in": "Default Store View",
+                "email": "test@test.com",
+                "firstname": "test",
+                "lastname": "test",
+                "store_id": 1,
+                "website_id": 1,
+                "addresses": [],
+                "disable_auto_group_change": 0
               }
             }
           ],
@@ -1613,13 +1768,19 @@
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@test.com",
+                "firstname": "test",
+                "lastname": "test"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/customers",
               "method": "POST",
               "replyHeaders": {},
               "statusCode": 400,
@@ -1633,13 +1794,19 @@
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@test.com",
+                "firstname": "test",
+                "lastname": "test"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/customers",
               "method": "POST",
               "replyHeaders": {},
               "statusCode": 429,
@@ -1653,13 +1820,19 @@
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@test.com",
+                "firstname": "test",
+                "lastname": "test"
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/customers",
               "method": "POST",
               "replyHeaders": {},
               "statusCode": 500,
@@ -1678,85 +1851,161 @@
         {
           "ncStatusCode": 201,
           "payload": {
-            "doc": {}
+            "doc": {
+              "invoice": {},
+              "ship": {
+                "tracks": [
+                  {
+                    "trackNumber": "abc123",
+                    "title": "same day",
+                    "carrierCode": "UPS"
+                  }
+                ]
+              }
+            },
+            "salesOrderRemoteID": 10
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/orders/10",
+              "method": "GET",
+              "replyHeaders": {},
+              "statusCode": 200,
+              "responsePayload": {
+                "entity_id": 10,
+                "increment_id": "000000007",
+                "state": "processing",
+                "status": "processing",
+                "store_id": 1,
+                "total_item_count": 1,
+                "total_qty_ordered": 1,
+                "items": [
+                  {
+                    "item_id": 10,
+                    "order_id": 10,
+                    "product_id": 2044,
+                    "product_type": "simple",
+                    "qty_canceled": 0,
+                    "qty_invoiced": 0,
+                    "qty_ordered": 1,
+                    "qty_refunded": 0,
+                    "qty_shipped": 0,
+                    "quote_item_id": 4,
+                    "row_invoiced": 0,
+                    "sku": "WSH12-32-Red",
+                    "store_id": 1
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "/V1/order/10/ship",
               "method": "POST",
               "replyHeaders": {},
-              "statusCode": 201,
-              "responsePayload": {
-                "fulfillment": {
-                  "id": 1073339459
-                }
-              }
+              "statusCode": 200,
+              "responsePayload": "24"
             }
           ],
           "channelProfile": {
-            "fulfillmentBusinessReferences": ["fulfillmentid"]
+            "fulfillmentBusinessReferences": ["entity_id"]
           }
         },
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": {
+              "invoice": {},
+              "ship": {
+                "tracks": [
+                  {
+                    "trackNumber": "abc123",
+                    "title": "same day",
+                    "carrierCode": "UPS"
+                  }
+                ]
+              }
+            },
+            "salesOrderRemoteID": 10
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
-              "method": "POST",
+              "uri": "/V1/orders/10",
+              "method": "GET",
               "replyHeaders": {},
               "statusCode": 400,
               "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "fulfillmentBusinessReferences": ["fulfillmentid"]
+            "fulfillmentBusinessReferences": ["entity_id"]
           }
         },
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": {
+              "invoice": {},
+              "ship": {
+                "tracks": [
+                  {
+                    "trackNumber": "abc123",
+                    "title": "same day",
+                    "carrierCode": "UPS"
+                  }
+                ]
+              }
+            },
+            "salesOrderRemoteID": 10
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
-              "method": "POST",
+              "uri": "/V1/orders/10",
+              "method": "GET",
               "replyHeaders": {},
               "statusCode": 429,
               "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "fulfillmentBusinessReferences": ["fulfillmentid"]
+            "fulfillmentBusinessReferences": ["entity_id"]
           }
         },
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": {
+              "invoice": {},
+              "ship": {
+                "tracks": [
+                  {
+                    "trackNumber": "abc123",
+                    "title": "same day",
+                    "carrierCode": "UPS"
+                  }
+                ]
+              }
+            },
+            "salesOrderRemoteID": 10
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
-              "method": "POST",
+              "uri": "/V1/orders/10",
+              "method": "GET",
               "replyHeaders": {},
               "statusCode": 500,
               "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "fulfillmentBusinessReferences": ["fulfillmentid"]
+            "fulfillmentBusinessReferences": ["entity_id"]
           }
         }
       ]
@@ -2036,39 +2285,84 @@
         {
           "ncStatusCode": 200,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@test.com",
+                "firstname": "test",
+                "lastname": "test",
+                "website_id": 1
+              }
+            },
+            "customerRemoteID": 17
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/customers/17",
+              "method": "GET",
+              "replyHeaders": {},
+              "statusCode": 200,
+              "responsePayload": {
+                "id": 17,
+                "group_id": 1,
+                "updated_at": "2018-05-24 02:12:45",
+                "email": "test@test.com",
+                "firstname": "test",
+                "lastname": "test",
+                "store_id": 1,
+                "website_id": 1,
+                "addresses": [],
+                "disable_auto_group_change": 0
+              }
+            },
+            {
+              "uri": "/V1/customers/17",
               "method": "PUT",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "customer": {
-                  "id": 1073339459,
-                  "email": "derek.boytim@nchannel.com"
-                }
+                "id": 17,
+                "group_id": 1,
+                "updated_at": "2018-05-24 02:12:45",
+                "email": "test@test.com",
+                "firstname": "test",
+                "lastname": "test",
+                "store_id": 1,
+                "website_id": 1,
+                "addresses": [],
+                "disable_auto_group_change": 0
               }
             }
           ],
           "channelProfile": {
             "customerBusinessReferences": ["email"]
+          },
+          "flowContext": {
+            "addressUpdateMethod": "merge",
+            "addressMatchingExpression":
+              "$lowercase($replace($trim($join([firstname,lastname,street[0],city,country_id,$string(region_id)])),' ',''))"
           }
         },
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@test.com",
+                "firstname": "test",
+                "lastname": "test",
+                "website_id": 1
+              }
+            },
+            "customerRemoteID": 17
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
-              "method": "PUT",
+              "uri": "/V1/customers/17",
+              "method": "GET",
               "replyHeaders": {},
               "statusCode": 400,
               "responsePayload": {}
@@ -2081,14 +2375,22 @@
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@test.com",
+                "firstname": "test",
+                "lastname": "test",
+                "website_id": 1
+              }
+            },
+            "customerRemoteID": 17
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
-              "method": "PUT",
+              "uri": "/V1/customers/17",
+              "method": "GET",
               "replyHeaders": {},
               "statusCode": 429,
               "responsePayload": {}
@@ -2101,14 +2403,22 @@
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": {
+              "customer": {
+                "email": "test@test.com",
+                "firstname": "test",
+                "lastname": "test",
+                "website_id": 1
+              }
+            },
+            "customerRemoteID": 17
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/default",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
-              "method": "PUT",
+              "uri": "/V1/customers/17",
+              "method": "GET",
               "replyHeaders": {},
               "statusCode": 500,
               "responsePayload": {}

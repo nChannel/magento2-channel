@@ -1,137 +1,147 @@
-let InsertFulfillment = function (ncUtil,
-                                 channelProfile,
-                                 flowContext,
-                                 payload,
-                                 callback) {
+function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callback) {
+  const nc = require("../util/ncUtils");
+  const stub = new nc.Stub("InsertFulfillment", null, ...arguments);
 
-  log("Building response object...", ncUtil);
-  let out = {
-    ncStatusCode: null,
-    response: {},
-    payload: {}
-  };
+  validateFunction()
+    .then(getOrder)
+    .then(matchLineItems)
+    .then(insertInvoice)
+    .then(insertShipment)
+    .then(buildResponse)
+    .catch(handleError)
+    .then(() => callback(stub.out))
+    .catch(error => {
+      logError(`The callback function threw an exception: ${error}`);
+      setTimeout(() => {
+        throw error;
+      });
+    });
 
-  let invalid = false;
-  let invalidMsg = "";
+  async function validateFunction() {
+    if (stub.messages.length === 0) {
+      if (stub.flowContext && stub.flowContext.doInvoice) {
+        if (!nc.isNonEmptyObject(stub.payload.doc.invoice)) {
+          stub.messages.push("The 'doInvoice' flag is true, but no invoice document was provided.");
+        }
+      }
+      if (!nc.isNonEmptyObject(stub.payload.doc.ship)) {
+        stub.messages.push("No ship document was provided.");
+      }
+    }
 
-  //If ncUtil does not contain a request object, the request can't be sent
-  if (!ncUtil) {
-    invalid = true;
-    invalidMsg = "ncUtil was not provided"
+    if (stub.messages.length > 0) {
+      stub.messages.forEach(msg => logError(msg));
+      stub.out.ncStatusCode = 400;
+      throw new Error(`Invalid request [${stub.messages.join(" ")}]`);
+    }
+    logInfo("Function is valid.");
   }
 
-  //If channelProfile does not contain channelSettingsValues, channelAuthValues or fulfillmentBusinessReferences, the request can't be sent
-  if (!channelProfile) {
-    invalid = true;
-    invalidMsg = "channelProfile was not provided"
-  } else if (!channelProfile.channelSettingsValues) {
-    invalid = true;
-    invalidMsg = "channelProfile.channelSettingsValues was not provided"
-  } else if (!channelProfile.channelSettingsValues.protocol) {
-    invalid = true;
-    invalidMsg = "channelProfile.channelSettingsValues.protocol was not provided"
-  } else if (!channelProfile.channelAuthValues) {
-    invalid = true;
-    invalidMsg = "channelProfile.channelAuthValues was not provided"
-  } else if (!channelProfile.fulfillmentBusinessReferences) {
-    invalid = true;
-    invalidMsg = "channelProfile.fulfillmentBusinessReferences was not provided"
-  } else if (!Array.isArray(channelProfile.fulfillmentBusinessReferences)) {
-    invalid = true;
-    invalidMsg = "channelProfile.fulfillmentBusinessReferences is not an array"
-  } else if (channelProfile.fulfillmentBusinessReferences.length === 0) {
-    invalid = true;
-    invalidMsg = "channelProfile.fulfillmentBusinessReferences is empty"
+  async function getOrder() {
+    return await stub.request.get({
+      url: `/V1/orders/${stub.payload.salesOrderRemoteID}`
+    });
   }
 
-  //If a sales order document was not passed in, the request is invalid
-  if (!payload) {
-    invalid = true;
-    invalidMsg = "payload was not provided"
-  } else if (!payload.doc) {
-    invalid = true;
-    invalidMsg = "payload.doc was not provided";
-  }
+  async function matchLineItems(getOrderResponse) {
+    const order = getOrderResponse.body;
 
-  //If callback is not a function
-  if (!callback) {
-    throw new Error("A callback function was not provided");
-  } else if (typeof callback !== 'function') {
-    throw new TypeError("callback is not a function")
-  }
-
-  if (!invalid) {
-    // Using request for example - A different npm module may be needed depending on the API communication is being made to
-    // The `soap` module can be used in place of `request` but the logic and data being sent will be different
-    let request = require('request');
-
-    let url = "https://localhost/";
-
-    // Add any headers for the request
-    let headers = {
-
-    };
-
-    // Log URL
-    log("Using URL [" + url + "]", ncUtil);
-
-    // Set options
-    let options = {
-      url: url,
-      method: "POST",
-      headers: headers,
-      body: payload.doc,
-      json: true
-    };
-
-    try {
-      // Pass in our URL and headers
-      request(options, function (error, response, body) {
-        if (!error) {
-          // If no errors, process results here
-          if (response.statusCode === 201) {
-            out.ncStatusCode = 201;
-          } else if (response.statusCode == 429) {
-            out.ncStatusCode = 429;
-            out.payload.error = body;
-          } else if (response.statusCode == 500) {
-            out.ncStatusCode = 500;
-            out.payload.error = body;
+    if (nc.isNonEmptyObject(stub.payload.doc.invoice) && nc.isNonEmptyArray(stub.payload.doc.invoice.items)) {
+      stub.payload.doc.invoice.items.forEach(item => {
+        if (nc.isNonEmptyString(item.sku)) {
+          const orderItem = order.items.find(i => i.sku === item.sku);
+          if (orderItem != null) {
+            item.orderItemId = orderItem.item_id;
+            delete item.sku;
           } else {
-            out.ncStatusCode = 400;
-            out.payload.error = body;
+            throw new Error(`Order ${order.entity_id} does not have a line item matching invoice sku ${item.sku}.`);
           }
-          callback(out);
-        } else {
-          // If an error occurs, log the error here
-          logError("Do InsertFulfillment Callback error - " + error, ncUtil);
-          out.ncStatusCode = 500;
-          out.payload.error = {err: error};
-          callback(out);
         }
       });
-    } catch (err) {
-      // Exception Handling
-      logError("Exception occurred in InsertFulfillment - " + err, ncUtil);
-      out.ncStatusCode = 500;
-      out.payload.error = {err: err, stack: err.stackTrace};
-      callback(out);
     }
-  } else {
-    // Invalid Request
-    log("Callback with an invalid request - " + invalidMsg, ncUtil);
-    out.ncStatusCode = 400;
-    out.payload.error = invalidMsg;
-    callback(out);
+
+    if (nc.isNonEmptyObject(stub.payload.doc.ship) && nc.isNonEmptyArray(stub.payload.doc.ship.items)) {
+      stub.payload.doc.ship.items.forEach(item => {
+        if (nc.isNonEmptyString(item.sku)) {
+          const orderItem = order.items.find(i => i.sku === item.sku);
+          if (orderItem != null) {
+            item.orderItemId = orderItem.item_id;
+            delete item.sku;
+          } else {
+            throw new Error(`Order ${order.entity_id} does not have a line item matching ship sku ${item.sku}.`);
+          }
+        }
+      });
+    }
   }
-};
 
-function logError(msg, ncUtil) {
-  console.log("[error] " + msg);
-}
+  async function insertInvoice() {
+    if (stub.flowContext && stub.flowContext.doInvoice) {
+      logInfo("Inserting new invoice record...");
 
-function log(msg, ncUtil) {
-  console.log("[info] " + msg);
+      return await stub.request.post({
+        url: `/V1/order/${stub.payload.salesOrderRemoteID}/invoice`,
+        body: stub.payload.doc.invoice
+      });
+    }
+  }
+
+  async function insertShipment() {
+    logInfo("Inserting new shipment record...");
+
+    try {
+      return await stub.request.post({
+        url: `/V1/order/${stub.payload.salesOrderRemoteID}/ship`,
+        body: stub.payload.doc.ship
+      });
+    } catch (error) {
+      if (stub.flowContext && stub.flowContext.doInvoice) {
+        if (error.statusCode >= 500 || error.statusCode === 429) {
+          // Force statusCode to 400 if we have already completed invoice successfully to prevent unwanted retries.
+          stub.out.ncStatusCode = 400; // Retrying could result in duplicate invoices and/or captured payments.
+          logError("The invoice was inserted successfully, but the shipment insertion has failed.");
+        }
+      }
+      throw error;
+    }
+  }
+
+  async function buildResponse(response) {
+    stub.out.response.endpointStatusCode = response.statusCode;
+    stub.out.ncStatusCode = 201;
+    stub.out.payload.fulfillmentRemoteID = response.body;
+    stub.out.payload.salesOrderRemoteID = stub.payload.salesOrderRemoteID;
+  }
+
+  async function handleError(error) {
+    logError(error);
+    if (error.name === "StatusCodeError") {
+      stub.out.response.endpointStatusCode = error.statusCode;
+      stub.out.response.endpointStatusMessage = error.message;
+      if (error.statusCode >= 500) {
+        stub.out.ncStatusCode = stub.out.ncStatusCode || 500;
+      } else if (error.statusCode === 429) {
+        logWarn("Request was throttled.");
+        stub.out.ncStatusCode = stub.out.ncStatusCode || 429;
+      } else {
+        stub.out.ncStatusCode = stub.out.ncStatusCode || 400;
+      }
+    }
+    stub.out.payload.error = error;
+    stub.out.ncStatusCode = stub.out.ncStatusCode || 500;
+  }
+
+  function logInfo(msg) {
+    stub.log(msg, "info");
+  }
+
+  function logWarn(msg) {
+    stub.log(msg, "warn");
+  }
+
+  function logError(msg) {
+    stub.log(msg, "error");
+  }
 }
 
 module.exports.InsertFulfillment = InsertFulfillment;

@@ -1,166 +1,217 @@
-let GetSalesOrderFromQuery = function (ncUtil,
-                                 channelProfile,
-                                 flowContext,
-                                 payload,
-                                 callback) {
+function GetSalesOrderFromQuery(ncUtil, channelProfile, flowContext, payload, callback) {
+  const nc = require("../util/ncUtils");
+  const referenceLocations = ["salesOrderBusinessReferences"];
+  const stub = new nc.Stub("GetSalesOrderFromQuery", referenceLocations, ...arguments);
 
-  log("Building response object...", ncUtil);
-  let out = {
-    ncStatusCode: null,
-    response: {},
-    payload: {}
-  };
-
-  let invalid = false;
-  let invalidMsg = "";
-
-  //If ncUtil does not contain a request object, the request can't be sent
-  if (!ncUtil) {
-    invalid = true;
-    invalidMsg = "ncUtil was not provided"
-  }
-
-  //If channelProfile does not contain channelSettingsValues, channelAuthValues or salesOrderBusinessReferences, the request can't be sent
-  if (!channelProfile) {
-    invalid = true;
-    invalidMsg = "channelProfile was not provided"
-  } else if (!channelProfile.channelSettingsValues) {
-    invalid = true;
-    invalidMsg = "channelProfile.channelSettingsValues was not provided"
-  } else if (!channelProfile.channelSettingsValues.protocol) {
-    invalid = true;
-    invalidMsg = "channelProfile.channelSettingsValues.protocol was not provided"
-  } else if (!channelProfile.channelAuthValues) {
-    invalid = true;
-    invalidMsg = "channelProfile.channelAuthValues was not provided"
-  } else if (!channelProfile.salesOrderBusinessReferences) {
-    invalid = true;
-    invalidMsg = "channelProfile.salesOrderBusinessReferences was not provided"
-  } else if (!Array.isArray(channelProfile.salesOrderBusinessReferences)) {
-    invalid = true;
-    invalidMsg = "channelProfile.salesOrderBusinessReferences is not an array"
-  } else if (channelProfile.salesOrderBusinessReferences.length === 0) {
-    invalid = true;
-    invalidMsg = "channelProfile.salesOrderBusinessReferences is empty"
-  }
-
-  //If a sales order document was not passed in, the request is invalid
-  if (!payload) {
-    invalid = true;
-    invalidMsg = "payload was not provided"
-  } else if (!payload.doc) {
-    invalid = true;
-    invalidMsg = "payload.doc was not provided";
-  }
-
-  //If callback is not a function
-  if (!callback) {
-    throw new Error("A callback function was not provided");
-  } else if (typeof callback !== 'function') {
-    throw new TypeError("callback is not a function")
-  }
-
-  if (!invalid) {
-    // Using request for example - A different npm module may be needed depending on the API communication is being made to
-    // The `soap` module can be used in place of `request` but the logic and data being sent will be different
-    let request = require('request');
-
-    let url = "https://localhost/";
-
-    // Add any headers for the request
-    let headers = {
-
-    };
-
-    // Log URL
-    log("Using URL [" + url + "]", ncUtil);
-
-    // Set options
-    let options = {
-      url: url,
-      method: "GET",
-      headers: headers,
-      body: payload.doc,
-      json: true
-    };
-
-    try {
-      // Pass in our URL and headers
-      request(options, function (error, response, body) {
-        if (!error) {
-          // If no errors, process results here
-          log("Do GetSalesOrderFromQuery Callback", ncUtil);
-          out.response.endpointStatusCode = response.statusCode;
-          out.response.endpointStatusMessage = response.statusMessage;
-
-          // Parse data
-          let docs = [];
-          let data = body;
-
-          if (response.statusCode === 200) {
-            if (data.orders && data.orders.length > 0) {
-              for (let i = 0; i < data.orders.length; i++) {
-                let order = {
-                  order: data.orders[i]
-                };
-                docs.push({
-                  doc: order,
-                  salesOrderRemoteID: order.order.id,
-                  salesOrderBusinessReference: order.order.id
-                });
-              }
-              if (docs.length === payload.doc.pageSize) {
-                out.ncStatusCode = 206;
-              } else {
-                out.ncStatusCode = 200;
-              }
-              out.payload = docs;
-            } else {
-              out.ncStatusCode = 204;
-              out.payload = data;
-            }
-          } else if (response.statusCode === 429) {
-            out.ncStatusCode = 429;
-            out.payload.error = data;
-          } else if (response.statusCode === 500) {
-            out.ncStatusCode = 500;
-            out.payload.error = data;
-          } else {
-            out.ncStatusCode = 400;
-            out.payload.error = data;
-          }
-
-          callback(out);
-        } else {
-          // If an error occurs, log the error here
-          logError("Do GetSalesOrderFromQuery Callback error - " + error, ncUtil);
-          out.ncStatusCode = 500;
-          out.payload.error = error;
-          callback(out);
-        }
+  validateFunction()
+    .then(buildQuery)
+    .then(searchForOrders)
+    .then(buildResponse)
+    .catch(handleError)
+    .then(() => callback(stub.out))
+    .catch(error => {
+      logError(`The callback function threw an exception: ${error}`);
+      setTimeout(() => {
+        throw error;
       });
-    } catch (err) {
-      // Exception Handling
-      logError("Exception occurred in GetSalesOrderFromQuery - " + err, ncUtil);
-      out.ncStatusCode = 500;
-      out.payload.error = {err: err, stack: err.stackTrace};
-      callback(out);
+    });
+
+  async function validateFunction() {
+    if (stub.messages.length > 0) {
+      stub.messages.forEach(msg => logError(msg));
+      stub.out.ncStatusCode = 400;
+      throw new Error(`Invalid request [${stub.messages.join(" ")}]`);
     }
-  } else {
-    // Invalid Request
-    log("Callback with an invalid request - " + invalidMsg, ncUtil);
-    out.ncStatusCode = 400;
-    out.payload.error = invalidMsg;
-    callback(out);
+    logInfo("Function is valid.");
   }
-};
 
-function logError(msg, ncUtil) {
-  console.log("[error] " + msg);
-}
+  async function buildQuery() {
+    const query = {
+      search_criteria: {
+        filter_groups: [],
+        page_size: stub.payload.doc.pageSize,
+        current_page: stub.payload.doc.page
+      }
+    };
 
-function log(msg, ncUtil) {
-  console.log("[info] " + msg);
+    if (nc.isNonEmptyString(stub.payload.doc.status)) {
+      query.search_criteria.filter_groups.push({
+        filters: [
+          {
+            field: "status",
+            value: stub.payload.doc.status
+          }
+        ]
+      });
+    }
+
+    if (nc.isInteger(stub.payload.doc.store_id)) {
+      query.search_criteria.filter_groups.push({
+        filters: [
+          {
+            field: "store_id",
+            value: stub.payload.doc.store_id
+          }
+        ]
+      });
+    }
+
+    switch (stub.queryType) {
+      case "remoteIDs":
+        query.search_criteria.filter_groups.push({
+          filters: [
+            {
+              field: "entity_id",
+              value: stub.payload.doc.remoteIDs.join(),
+              condition_type: "in"
+            }
+          ]
+        });
+
+        break;
+
+      case "modifiedDateRange":
+        query.search_criteria.filter_groups.push({
+          filters: [
+            {
+              field: "updated_at",
+              value: nc.moment(stub.payload.doc.modifiedDateRange.startDateGMT).toISOString(),
+              condition_type: "gteq"
+            }
+          ]
+        });
+        query.search_criteria.filter_groups.push({
+          filters: [
+            {
+              field: "updated_at",
+              value: nc.moment(stub.payload.doc.modifiedDateRange.endDateGMT).toISOString(),
+              condition_type: "lteq"
+            }
+          ]
+        });
+
+        break;
+
+      case "createdDateRange":
+        query.search_criteria.filter_groups.push({
+          filters: [
+            {
+              field: "created_at",
+              value: nc.moment(stub.payload.doc.createdDateRange.startDateGMT).toISOString(),
+              condition_type: "gteq"
+            }
+          ]
+        });
+        query.search_criteria.filter_groups.push({
+          filters: [
+            {
+              field: "created_at",
+              value: nc.moment(stub.payload.doc.createdDateRange.endDateGMT).toISOString(),
+              condition_type: "lteq"
+            }
+          ]
+        });
+
+        break;
+
+      case "searchFields":
+        stub.payload.doc.searchFields.forEach(searchField => {
+          query.search_criteria.filter_groups.push({
+            filters: [
+              {
+                field: searchField.searchField,
+                value: searchField.searchValues.join(),
+                condition_type: "in"
+              }
+            ]
+          });
+        });
+
+        break;
+
+      default:
+        throw new Error(`Unknown query type: '${stub.queryType}'`);
+    }
+
+    return query;
+  }
+
+  async function searchForOrders(query) {
+    logInfo("Searching for orders matching query...");
+
+    return await stub.request.get({
+      url: "/V1/orders",
+      qsStringifyOptions: { options: { encode: false } },
+      qs: query
+    });
+  }
+
+  async function buildResponse(response) {
+    stub.out.response.endpointStatusCode = response.statusCode;
+    stub.out.response.endpointStatusMessage = response.message;
+    stub.out.payload = [];
+
+    const orders = response.body.items;
+    const pageSize = response.body.search_criteria.page_size;
+    const currentPage = response.body.search_criteria.current_page;
+    const totalCount = response.body.total_count;
+    const totalPages = Math.ceil(totalCount / pageSize);
+    const hasMore = currentPage < totalPages;
+
+    logInfo(`Found ${totalCount} total orders.`);
+    if (totalCount > 0) {
+      logInfo(`Returning page ${currentPage} of ${totalPages} with ${orders.length} orders.`);
+    }
+
+    orders.forEach(order => {
+      stub.out.payload.push({
+        doc: order,
+        salesOrderRemoteID: order.entity_id,
+        salesOrderBusinessReference: nc.extractBusinessReferences(
+          stub.channelProfile.salesOrderBusinessReferences,
+          order
+        )
+      });
+    });
+
+    if (orders.length === 0) {
+      stub.out.ncStatusCode = 204;
+    } else if (hasMore) {
+      stub.out.ncStatusCode = 206;
+    } else {
+      stub.out.ncStatusCode = 200;
+    }
+  }
+
+  async function handleError(error) {
+    logError(error);
+    if (error.name === "StatusCodeError") {
+      stub.out.response.endpointStatusCode = error.statusCode;
+      stub.out.response.endpointStatusMessage = error.message;
+      if (error.statusCode >= 500) {
+        stub.out.ncStatusCode = 500;
+      } else if (error.statusCode === 429) {
+        logWarn("Request was throttled.");
+        stub.out.ncStatusCode = 429;
+      } else {
+        stub.out.ncStatusCode = 400;
+      }
+    }
+    stub.out.payload.error = error;
+    stub.out.ncStatusCode = stub.out.ncStatusCode || 500;
+  }
+
+  function logInfo(msg) {
+    stub.log(msg, "info");
+  }
+
+  function logWarn(msg) {
+    stub.log(msg, "warn");
+  }
+
+  function logError(msg) {
+    stub.log(msg, "error");
+  }
 }
 
 module.exports.GetSalesOrderFromQuery = GetSalesOrderFromQuery;
