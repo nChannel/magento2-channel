@@ -1,0 +1,11 @@
+steps:
+#
+# Build and run unit tests
+#
+- name: 'docker/compose:1.18.0'
+  args: ['-f', 'Docker-compose-test.yml', 'run', 'sut' ]
+#
+# pubblish components
+#
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['publish','--tag', 'notcertified', '--access', 'public']
