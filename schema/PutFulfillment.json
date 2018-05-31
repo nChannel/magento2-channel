@@ -1,147 +1,152 @@
 {
-  "type": "object",
-  "definitions": {},
-  "$schema": "http://json-schema.org/draft-06/schema#",
-  "properties": {
-    "invoice": {
-      "type": "object",
-      "properties": {
-        "capture": {
-          "type": "boolean"
-        },
-        "items": {
-          "type": "array",
+  "name": "Magento 2 Put Fulfillment Schema",
+  "schemaDef": {
+    "type": "object",
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "properties": {
+      "invoice": {
+        "type": "object",
+        "properties": {
+          "capture": {
+            "type": "boolean"
+          },
           "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "extensionAttributes": {
+                  "type": "object"
+                },
+                "orderItemId": {
+                  "type": "number"
+                },
+                "qty": {
+                  "type": "number"
+                },
+                "sku": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "notify": {
+            "type": "boolean"
+          },
+          "appendComment": {
+            "type": "boolean"
+          },
+          "comment": {
             "type": "object",
             "properties": {
               "extensionAttributes": {
                 "type": "object"
               },
-              "orderItemId": {
-                "type": "number"
-              },
-              "qty": {
-                "type": "number"
-              },
-              "sku": {
+              "comment": {
                 "type": "string"
+              },
+              "isVisibleOnFront": {
+                "type": "number"
               }
             }
-          }
-        },
-        "notify": {
-          "type": "boolean"
-        },
-        "appendComment": {
-          "type": "boolean"
-        },
-        "comment": {
-          "type": "object",
-          "properties": {
-            "extensionAttributes": {
-              "type": "object"
-            },
-            "comment": {
-              "type": "string"
-            },
-            "isVisibleOnFront": {
-              "type": "number"
-            }
-          }
-        },
-        "arguments": {
-          "type": "object",
-          "properties": {
-            "extensionAttributes": {
-              "type": "object"
+          },
+          "arguments": {
+            "type": "object",
+            "properties": {
+              "extensionAttributes": {
+                "type": "object"
+              }
             }
           }
         }
-      }
-    },
-    "ship": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
+      },
+      "ship": {
+        "type": "object",
+        "properties": {
           "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "extensionAttributes": {
+                  "type": "object"
+                },
+                "orderItemId": {
+                  "type": "number"
+                },
+                "qty": {
+                  "type": "number"
+                },
+                "sku": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "notify": {
+            "type": "boolean"
+          },
+          "appendComment": {
+            "type": "boolean"
+          },
+          "comment": {
             "type": "object",
             "properties": {
               "extensionAttributes": {
                 "type": "object"
               },
-              "orderItemId": {
+              "comment": {
+                "type": "string"
+              },
+              "isVisibleOnFront": {
                 "type": "number"
-              },
-              "qty": {
-                "type": "number"
-              },
-              "sku": {
-                "type": "string"
               }
             }
-          }
-        },
-        "notify": {
-          "type": "boolean"
-        },
-        "appendComment": {
-          "type": "boolean"
-        },
-        "comment": {
-          "type": "object",
-          "properties": {
-            "extensionAttributes": {
-              "type": "object"
-            },
-            "comment": {
-              "type": "string"
-            },
-            "isVisibleOnFront": {
-              "type": "number"
-            }
-          }
-        },
-        "tracks": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "extensionAttributes": {
-                "type": "object"
-              },
-              "trackNumber": {
-                "type": "string"
-              },
-              "title": {
-                "type": "string"
-              },
-              "carrierCode": {
-                "type": "string"
+          },
+          "tracks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "extensionAttributes": {
+                  "type": "object"
+                },
+                "trackNumber": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "carrierCode": {
+                  "type": "string"
+                }
               }
             }
-          }
-        },
-        "packages": {
-          "type": "array",
-          "items": {
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "extensionAttributes": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "arguments": {
             "type": "object",
             "properties": {
               "extensionAttributes": {
                 "type": "object"
               }
-            }
-          }
-        },
-        "arguments": {
-          "type": "object",
-          "properties": {
-            "extensionAttributes": {
-              "type": "object"
             }
           }
         }
       }
     }
-  }
+  },
+  "tags": ["Put", "Fulfillment"],
+  "audit": {}
 }
