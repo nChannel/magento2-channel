@@ -1,0 +1,233 @@
+{
+  "name": "Magento 2 Put Customer Schema",
+  "schemaDef": {
+    "type": "object",
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "properties": {
+      "customer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "group_id": {
+            "type": "number"
+          },
+          "default_billing": {
+            "type": "string"
+          },
+          "default_shipping": {
+            "type": "string"
+          },
+          "confirmation": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "created_in": {
+            "type": "string"
+          },
+          "dob": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "middlename": {
+            "type": "string"
+          },
+          "prefix": {
+            "type": "string"
+          },
+          "suffix": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "number"
+          },
+          "store_id": {
+            "type": "number"
+          },
+          "taxvat": {
+            "type": "string"
+          },
+          "website_id": {
+            "type": "number"
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "customer_id": {
+                  "type": "number"
+                },
+                "region": {
+                  "type": "object",
+                  "properties": {
+                    "region_code": {
+                      "type": "string"
+                    },
+                    "region": {
+                      "type": "string"
+                    },
+                    "region_id": {
+                      "type": "number"
+                    },
+                    "extension_attributes": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "region_id": {
+                  "type": "number"
+                },
+                "country_id": {
+                  "type": "string"
+                },
+                "street": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "company": {
+                  "type": "string"
+                },
+                "telephone": {
+                  "type": "string"
+                },
+                "fax": {
+                  "type": "string"
+                },
+                "postcode": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "firstname": {
+                  "type": "string"
+                },
+                "lastname": {
+                  "type": "string"
+                },
+                "middlename": {
+                  "type": "string"
+                },
+                "prefix": {
+                  "type": "string"
+                },
+                "suffix": {
+                  "type": "string"
+                },
+                "vat_id": {
+                  "type": "string"
+                },
+                "default_shipping": {
+                  "type": "boolean"
+                },
+                "default_billing": {
+                  "type": "boolean"
+                },
+                "extension_attributes": {
+                  "type": "object"
+                },
+                "custom_attributes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "attribute_code": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "disable_auto_group_change": {
+            "type": "number"
+          },
+          "extension_attributes": {
+            "type": "object",
+            "properties": {
+              "company_attributes": {
+                "type": "object",
+                "properties": {
+                  "customer_id": {
+                    "type": "number"
+                  },
+                  "company_id": {
+                    "type": "number"
+                  },
+                  "job_title": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "number"
+                  },
+                  "telephone": {
+                    "type": "string"
+                  },
+                  "extension_attributes": {
+                    "type": "object"
+                  }
+                }
+              },
+              "is_subscribed": {
+                "type": "boolean"
+              }
+            }
+          },
+          "custom_attributes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "attribute_code": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "password": {
+        "type": "string",
+        "description": "On insert only."
+      },
+      "redirectUrl": {
+        "type": "string",
+        "description": "On insert only."
+      },
+      "passwordHash": {
+        "type": "string",
+        "description": "On update only."
+      }
+    }
+  },
+  "tags": ["Put", "Customer"],
+  "audit": {}
+}
