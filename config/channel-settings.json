@@ -45,13 +45,7 @@
           "doUpdateFulfillmentFlag": false,
           "doInsertInvoice": true
         },
-        "configView": [
-          "canInsertFulfillmentFlag",
-          "canUpdateFulfillmentFlag",
-          "doInsertFulfillmentFlag",
-          "doUpdateFulfillmentFlag",
-          "doInsertInvoice"
-        ],
+        "configView": ["doInsertFulfillmentFlag", "doInsertInvoice"],
         "configModel": {
           "required": [
             "canInsertFulfillmentFlag",
