@@ -358,7 +358,7 @@
       "documentDef": {
         "schema": {},
         "referenceLocation": {
-          "productBusinessReferences": ["sku"]
+          "productBusinessReferences": ["product.sku"]
         }
       }
     },
