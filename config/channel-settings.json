@@ -214,6 +214,227 @@
           "customerBusinessReferences": ["email"]
         }
       }
+    },
+    {
+      "name": "PUT PRODUCT",
+      "description": "PUT PRODUCT",
+      "channelVerb": "PUT",
+      "channelNoun": "PRODUCT",
+      "ruleDef": {
+        "ruleSchema": {},
+        "defaultRuleValues": {}
+      },
+      "configDef": {
+        "configModel": {
+          "type": "object",
+          "properties": {
+            "canInsertSimpleProduct": {
+              "type": "boolean",
+              "title": "PUT Product, canInsertSimpleProduct"
+            },
+            "canInsertMatrixProduct": {
+              "type": "boolean",
+              "title": "PUT Product, canInsertMatrixProduct"
+            },
+            "canInsertProductPricingFlag": {
+              "type": "boolean",
+              "title": "PUT Product, canInsertProductPricingFlag"
+            },
+            "canInsertProductQuantityFlag": {
+              "type": "boolean",
+              "title": "PUT Product, canInsertProductQuantityFlag"
+            },
+            "canUpdateSimpleProduct": {
+              "type": "boolean",
+              "title": "PUT Product, canUpdateSimpleProduct"
+            },
+            "canUpdateMatrixProduct": {
+              "type": "boolean",
+              "title": "PUT Product, canUpdateMatrixProduct"
+            },
+            "canUpdateProductPricingFlag": {
+              "type": "boolean",
+              "title": "PUT Product, canUpdateProductPricingFlag"
+            },
+            "canUpdateProductQuantityFlag": {
+              "type": "boolean",
+              "title": "PUT Product, canUpdateProductQuantityFlag"
+            },
+            "doInsertSimpleProduct": {
+              "type": "boolean",
+              "title": "PUT Product, doInsertSimpleProduct"
+            },
+            "doInsertMatrixProduct": {
+              "type": "boolean",
+              "title": "PUT Product, doInsertMatrixProduct"
+            },
+            "doInsertProductPricingFlag": {
+              "type": "boolean",
+              "title": "PUT Product, doInsertProductPricingFlag"
+            },
+            "doInsertProductQuantityFlag": {
+              "type": "boolean",
+              "title": "PUT Product, doInsertProductQuantityFlag"
+            },
+            "doUpdateSimpleProduct": {
+              "type": "boolean",
+              "title": "PUT Product, doUpdateSimpleProduct"
+            },
+            "doUpdateMatrixProduct": {
+              "type": "boolean",
+              "title": "PUT Product, doUpdateMatrixProduct"
+            },
+            "doUpdateProductPricingFlag": {
+              "type": "boolean",
+              "title": "PUT Product, doUpdateProductPricingFlag"
+            },
+            "doUpdateProductQuantityFlag": {
+              "type": "boolean",
+              "title": "PUT Product, doUpdateProductQuantityFlag"
+            },
+            "doPutProductPricingFlag": {
+              "type": "boolean",
+              "title": "PUT Product, doPutProductPricingFlag"
+            },
+            "doPutProductQuantityFlag": {
+              "type": "boolean",
+              "title": "PUT Product, doPutProductQuantityFlag"
+            }
+          },
+          "required": [
+            "canInsertSimpleProduct",
+            "canInsertMatrixProduct",
+            "canInsertProductPricingFlag",
+            "canInsertProductQuantityFlag",
+            "canUpdateSimpleProduct",
+            "canUpdateMatrixProduct",
+            "canUpdateProductPricingFlag",
+            "canUpdateProductQuantityFlag",
+            "doInsertSimpleProduct",
+            "doInsertMatrixProduct",
+            "doInsertProductPricingFlag",
+            "doInsertProductQuantityFlag",
+            "doUpdateSimpleProduct",
+            "doUpdateMatrixProduct",
+            "doUpdateProductPricingFlag",
+            "doUpdateProductQuantityFlag",
+            "doPutProductPricingFlag",
+            "doPutProductQuantityFlag"
+          ]
+        },
+        "configView": [
+          "doInsertSimpleProduct",
+          "doInsertMatrixProduct",
+          "doInsertProductPricingFlag",
+          "doInsertProductQuantityFlag",
+          "doUpdateSimpleProduct",
+          "doUpdateMatrixProduct",
+          "doUpdateProductPricingFlag",
+          "doUpdateProductQuantityFlag",
+          "doPutProductPricingFlag",
+          "doPutProductQuantityFlag"
+        ],
+        "configValues": {
+          "canInsertSimpleProduct": true,
+          "canInsertMatrixProduct": true,
+          "canInsertProductPricingFlag": true,
+          "canInsertProductQuantityFlag": true,
+          "canUpdateSimpleProduct": true,
+          "canUpdateMatrixProduct": true,
+          "canUpdateProductPricingFlag": true,
+          "canUpdateProductQuantityFlag": true,
+          "doInsertSimpleProduct": true,
+          "doInsertMatrixProduct": true,
+          "doInsertProductPricingFlag": true,
+          "doInsertProductQuantityFlag": true,
+          "doUpdateSimpleProduct": true,
+          "doUpdateMatrixProduct": true,
+          "doUpdateProductPricingFlag": true,
+          "doUpdateProductQuantityFlag": true,
+          "doPutProductPricingFlag": true,
+          "doPutProductQuantityFlag": true
+        }
+      },
+      "documentDef": {
+        "schema": {},
+        "referenceLocation": {
+          "productBusinessReferences": ["sku"]
+        }
+      }
+    },
+    {
+      "name": "PUT PRODUCTQUANTITY",
+      "description": "PUT PRODUCTQUANTITY",
+      "channelVerb": "PUT",
+      "channelNoun": "PRODUCTQUANTITY",
+      "ruleDef": {
+        "ruleSchema": {},
+        "defaultRuleValues": {}
+      },
+      "configDef": {
+        "configModel": {
+          "type": "object",
+          "properties": {
+            "canUpdateProductQuantityFlag": {
+              "type": "boolean",
+              "title": "PUT ProductQuantity, canUpdateProductQuantityFlag"
+            },
+            "doUpdateProductQuantityFlag": {
+              "type": "boolean",
+              "title": "PUT ProductQuantity, doUpdateProductQuantityFlag"
+            }
+          },
+          "required": ["canUpdateProductQuantityFlag", "doUpdateProductQuantityFlag"]
+        },
+        "configView": ["doUpdateProductQuantityFlag"],
+        "configValues": {
+          "canUpdateProductQuantityFlag": true,
+          "doUpdateProductQuantityFlag": true
+        }
+      },
+      "documentDef": {
+        "schema": {},
+        "referenceLocation": {
+          "productQuantityBusinessReferences": ["sku"]
+        }
+      }
+    },
+    {
+      "name": "PUT PRODUCTPRICING",
+      "description": "PUT PRODUCTPRICING",
+      "channelVerb": "PUT",
+      "channelNoun": "PRODUCTPRICING",
+      "ruleDef": {
+        "ruleSchema": {},
+        "defaultRuleValues": {}
+      },
+      "configDef": {
+        "configModel": {
+          "type": "object",
+          "properties": {
+            "canUpdateProductPricingFlag": {
+              "type": "boolean",
+              "title": "PUT ProductPricing, canUpdateProductPricingFlag"
+            },
+            "doUpdateProductPricingFlag": {
+              "type": "boolean",
+              "title": "PUT ProductPricing, doUpdateProductPricingFlag"
+            }
+          },
+          "required": ["canUpdateProductPricingFlag", "doUpdateProductPricingFlag"]
+        },
+        "configView": ["doUpdateProductPricingFlag"],
+        "configValues": {
+          "canUpdateProductPricingFlag": true,
+          "doUpdateProductPricingFlag": true
+        }
+      },
+      "documentDef": {
+        "schema": {},
+        "referenceLocation": {
+          "productPricingBusinessReferences": ["sku"]
+        }
+      }
     }
   ],
   "channelSettingsSchema": {
