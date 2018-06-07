@@ -39,13 +39,38 @@
       },
       "configDef": {
         "configValues": {
+          "canInsertFulfillmentFlag": true,
           "canUpdateFulfillmentFlag": false,
+          "doInsertFulfillmentFlag": true,
+          "doUpdateFulfillmentFlag": false,
           "doInsertInvoice": true
         },
-        "configView": ["doInsertInvoice"],
+        "configView": ["doInsertFulfillmentFlag", "doInsertInvoice"],
         "configModel": {
-          "required": ["doInsertInvoice"],
+          "required": [
+            "canInsertFulfillmentFlag",
+            "canUpdateFulfillmentFlag",
+            "doInsertFulfillmentFlag",
+            "doUpdateFulfillmentFlag",
+            "doInsertInvoice"
+          ],
           "properties": {
+            "canInsertFulfillmentFlag": {
+              "type": "boolean",
+              "title": "PUT Fulfillment, canInsertFulfillmentFlag"
+            },
+            "canUpdateFulfillmentFlag": {
+              "type": "boolean",
+              "title": "PUT Fulfillment, canUpdateFulfillmentFlag"
+            },
+            "doInsertFulfillmentFlag": {
+              "type": "boolean",
+              "title": "PUT Fulfillment, doInsertFulfillmentFlag"
+            },
+            "doUpdateFulfillmentFlag": {
+              "type": "boolean",
+              "title": "PUT Fulfillment, doUpdateFulfillmentFlag"
+            },
             "doInsertInvoice": {
               "type": "boolean",
               "title": "PUT Fulfillment, doInsertInvoice"
@@ -72,6 +97,54 @@
         "configModel": {
           "type": "object",
           "properties": {
+            "canInsertCustomerFlag": {
+              "title": "PUT Customer, canInsertCustomerFlag",
+              "type": "boolean"
+            },
+            "canInsertCustomerAddressFlag": {
+              "title": "PUT Customer Address, canInsertCustomerAddressFlag",
+              "type": "boolean"
+            },
+            "canInsertCustomerContactFlag": {
+              "title": "PUT Customer Contact, canInsertCustomerContactFlag",
+              "type": "boolean"
+            },
+            "canUpdateCustomerFlag": {
+              "title": "PUT Customer, canUpdateCustomerFlag",
+              "type": "boolean"
+            },
+            "canUpdateCustomerAddressFlag": {
+              "title": "PUT Customer Address, canUpdateCustomerAddressFlag",
+              "type": "boolean"
+            },
+            "canUpdateCustomerContactFlag": {
+              "title": "PUT Customer Contact, canUpdateCustomerContactFlag",
+              "type": "boolean"
+            },
+            "doInsertCustomerFlag": {
+              "title": "PUT Customer, doInsertCustomerFlag",
+              "type": "boolean"
+            },
+            "doInsertCustomerAddressFlag": {
+              "title": "PUT Customer Address, doInsertCustomerAddressFlag",
+              "type": "boolean"
+            },
+            "doInsertCustomerContactFlag": {
+              "title": "PUT Customer Contact, doInsertCustomerContactFlag",
+              "type": "boolean"
+            },
+            "doUpdateCustomerFlag": {
+              "title": "PUT Customer, doUpdateCustomerFlag",
+              "type": "boolean"
+            },
+            "doUpdateCustomerAddressFlag": {
+              "title": "PUT Customer Address, doUpdateCustomerAddressFlag",
+              "type": "boolean"
+            },
+            "doUpdateCustomerContactFlag": {
+              "title": "PUT Customer Contact, doUpdateCustomerContactFlag",
+              "type": "boolean"
+            },
             "doPutCustomerAddressesFlag": {
               "title": "PUT Customer, doPutCustomerAddressesFlag",
               "type": "boolean"
@@ -91,6 +164,18 @@
             }
           },
           "required": [
+            "canInsertCustomerFlag",
+            "canInsertCustomerAddressFlag",
+            "canInsertCustomerContactFlag",
+            "canUpdateCustomerFlag",
+            "canUpdateCustomerAddressFlag",
+            "canUpdateCustomerContactFlag",
+            "doInsertCustomerFlag",
+            "doInsertCustomerAddressFlag",
+            "doInsertCustomerContactFlag",
+            "doUpdateCustomerFlag",
+            "doUpdateCustomerAddressFlag",
+            "doUpdateCustomerContactFlag",
             "doPutCustomerAddressesFlag",
             "doPutCustomerContactsFlag",
             "addressUpdateMethod",
@@ -98,15 +183,24 @@
           ]
         },
         "configView": [
-          "doPutCustomerAddressesFlag",
-          "doPutCustomerContactsFlag",
+          "doInsertCustomerFlag",
+          "doUpdateCustomerFlag",
           "addressUpdateMethod",
           "addressMatchingExpression"
         ],
         "configValues": {
+          "canInsertCustomerFlag": true,
+          "canInsertCustomerAddressFlag": false,
+          "canInsertCustomerContactFlag": false,
           "canUpdateCustomerFlag": true,
           "canUpdateCustomerAddressFlag": false,
           "canUpdateCustomerContactFlag": false,
+          "doInsertCustomerFlag": true,
+          "doInsertCustomerAddressFlag": false,
+          "doInsertCustomerContactFlag": false,
+          "doUpdateCustomerFlag": true,
+          "doUpdateCustomerAddressFlag": false,
+          "doUpdateCustomerContactFlag": false,
           "doPutCustomerAddressesFlag": false,
           "doPutCustomerContactsFlag": false,
           "addressUpdateMethod": "merge",
@@ -165,7 +259,6 @@
           "title": "Implementation Folder Name"
         }
       ],
-
       "configValues": {
         "protocol": "https",
         "implFolderName": "magento2-channel"
