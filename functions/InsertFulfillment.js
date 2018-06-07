@@ -27,6 +27,13 @@ function InsertFulfillment(ncUtil, channelProfile, flowContext, payload, callbac
       if (!nc.isNonEmptyObject(stub.payload.doc.ship)) {
         stub.messages.push("No ship document was provided.");
       }
+      if (!nc.isInteger(Number(stub.payload.salesOrderRemoteID))) {
+        stub.messages.push(
+          `The payload.salesOrderRemoteID integer is ${
+            stub.payload.salesOrderRemoteID == null ? "missing" : "invalid"
+          }.`
+        );
+      }
     }
 
     if (stub.messages.length > 0) {
