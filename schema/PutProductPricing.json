@@ -1,0 +1,130 @@
+{
+  "name": "Magento 2 Put Product Pricing Schema",
+  "schemaDef": {
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "object",
+    "properties": {
+      "product": {
+        "type": "object",
+        "minProperties": 2,
+        "properties": {
+          "sku": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "tier_prices": {
+            "description": "Remove existing tier prices and replace them with the new ones.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "oneOf": [
+                {
+                  "description": "Fixed price.",
+                  "type": "object",
+                  "properties": {
+                    "customer_group_id": {
+                      "description":
+                        "32000 is the magic number that identifies 'All Groups' (may vary between Magento installations).",
+                      "type": "integer",
+                      "default": 32000
+                    },
+                    "qty": {
+                      "type": "number"
+                    },
+                    "value": {
+                      "type": "number"
+                    },
+                    "extension_attributes": {
+                      "type": "object",
+                      "properties": {
+                        "website_id": {
+                          "description": "Use 0 for 'All Websites'.",
+                          "type": "integer",
+                          "default": 0
+                        }
+                      },
+                      "required": ["website_id"],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": ["customer_group_id", "qty", "value", "extension_attributes"],
+                  "additionalProperties": false
+                },
+                {
+                  "description": "Discount percent price.",
+                  "type": "object",
+                  "properties": {
+                    "customer_group_id": {
+                      "description":
+                        "32000 is the magic number that identifies 'All Groups' (may vary between Magento installations).",
+                      "type": "integer",
+                      "default": 32000
+                    },
+                    "qty": {
+                      "type": "number"
+                    },
+                    "extension_attributes": {
+                      "type": "object",
+                      "properties": {
+                        "website_id": {
+                          "description": "Use 0 for 'All Websites'.",
+                          "type": "integer",
+                          "default": 0
+                        },
+                        "percentage_value": {
+                          "type": "number"
+                        }
+                      },
+                      "required": ["website_id", "percentage_value"],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": ["customer_group_id", "qty", "extension_attributes"],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "custom_attributes": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "attribute_code": {
+                  "type": "string",
+                  "enum": [
+                    "special_price",
+                    "special_from_date",
+                    "special_to_date",
+                    "cost",
+                    "msrp",
+                    "msrp_display_actual_price_type",
+                    "tax_class_id"
+                  ]
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": ["attribute_code", "value"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["sku"],
+        "additionalProperties": false
+      },
+      "saveOptions": {
+        "type": "boolean"
+      }
+    },
+    "required": ["product"],
+    "additionalProperties": false
+  },
+  "tags": ["Put", "Product"],
+  "audit": {}
+}
