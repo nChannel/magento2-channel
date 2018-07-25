@@ -236,14 +236,6 @@
               "type": "boolean",
               "title": "PUT Product, canInsertMatrixProduct"
             },
-            "canInsertProductPricingFlag": {
-              "type": "boolean",
-              "title": "PUT Product, canInsertProductPricingFlag"
-            },
-            "canInsertProductQuantityFlag": {
-              "type": "boolean",
-              "title": "PUT Product, canInsertProductQuantityFlag"
-            },
             "canUpdateSimpleProduct": {
               "type": "boolean",
               "title": "PUT Product, canUpdateSimpleProduct"
@@ -267,14 +259,6 @@
             "doInsertMatrixProduct": {
               "type": "boolean",
               "title": "PUT Product, doInsertMatrixProduct"
-            },
-            "doInsertProductPricingFlag": {
-              "type": "boolean",
-              "title": "PUT Product, doInsertProductPricingFlag"
-            },
-            "doInsertProductQuantityFlag": {
-              "type": "boolean",
-              "title": "PUT Product, doInsertProductQuantityFlag"
             },
             "doUpdateSimpleProduct": {
               "type": "boolean",
@@ -304,16 +288,12 @@
           "required": [
             "canInsertSimpleProduct",
             "canInsertMatrixProduct",
-            "canInsertProductPricingFlag",
-            "canInsertProductQuantityFlag",
             "canUpdateSimpleProduct",
             "canUpdateMatrixProduct",
             "canUpdateProductPricingFlag",
             "canUpdateProductQuantityFlag",
             "doInsertSimpleProduct",
             "doInsertMatrixProduct",
-            "doInsertProductPricingFlag",
-            "doInsertProductQuantityFlag",
             "doUpdateSimpleProduct",
             "doUpdateMatrixProduct",
             "doUpdateProductPricingFlag",
@@ -325,8 +305,6 @@
         "configView": [
           "doInsertSimpleProduct",
           "doInsertMatrixProduct",
-          "doInsertProductPricingFlag",
-          "doInsertProductQuantityFlag",
           "doUpdateSimpleProduct",
           "doUpdateMatrixProduct",
           "doUpdateProductPricingFlag",
@@ -337,16 +315,12 @@
         "configValues": {
           "canInsertSimpleProduct": true,
           "canInsertMatrixProduct": true,
-          "canInsertProductPricingFlag": true,
-          "canInsertProductQuantityFlag": true,
           "canUpdateSimpleProduct": true,
           "canUpdateMatrixProduct": true,
           "canUpdateProductPricingFlag": true,
           "canUpdateProductQuantityFlag": true,
           "doInsertSimpleProduct": true,
           "doInsertMatrixProduct": true,
-          "doInsertProductPricingFlag": true,
-          "doInsertProductQuantityFlag": true,
           "doUpdateSimpleProduct": true,
           "doUpdateMatrixProduct": true,
           "doUpdateProductPricingFlag": true,
@@ -357,6 +331,7 @@
       },
       "documentDef": {
         "schema": {},
+        "remoteID": "product.id",
         "referenceLocation": {
           "productBusinessReferences": ["product.sku"]
         }
@@ -394,8 +369,9 @@
       },
       "documentDef": {
         "schema": {},
+        "remoteID": "stockItem.item_id",
         "referenceLocation": {
-          "productQuantityBusinessReferences": ["sku"]
+          "productQuantityBusinessReferences": ["stockItem.stock_id", "stockItem.product_id"]
         }
       }
     },
@@ -432,7 +408,7 @@
       "documentDef": {
         "schema": {},
         "referenceLocation": {
-          "productPricingBusinessReferences": ["sku"]
+          "productPricingBusinessReferences": ["product.sku"]
         }
       }
     }
@@ -441,11 +417,13 @@
     "configDef": {
       "configModel": {
         "type": "object",
-        "title": "Magento 2.0 Channel Settings",
+        "title": "Magento 2 Channel Settings",
         "properties": {
           "protocol": {
             "title": "Protocol",
-            "type": "string"
+            "type": "string",
+            "default": "https",
+            "enum": ["https", "http"]
           },
           "store_base_url": {
             "title": "Store Base URL",
@@ -453,35 +431,28 @@
           },
           "store_code": {
             "title": "Store Code",
-            "type": "string"
+            "type": "string",
+            "default": "all"
           },
           "implFolderName": {
             "title": "Implementation Folder Name",
-            "type": "string"
+            "type": "string",
+            "default": "magento2-channel"
           }
         },
         "required": ["protocol", "store_base_url", "implFolderName"]
       },
       "configView": [
-        {
-          "key": "protocol",
-          "title": "Protocol"
-        },
+        "protocol",
         {
           "key": "store_base_url",
-          "title": "Store Base URL"
+          "placeholder": "example.com/index.php"
         },
-        {
-          "key": "store_code",
-          "title": "Store Code"
-        },
-        {
-          "key": "implFolderName",
-          "title": "Implementation Folder Name"
-        }
+        "store_code"
       ],
       "configValues": {
         "protocol": "https",
+        "store_code": "all",
         "implFolderName": "magento2-channel"
       }
     }
@@ -491,33 +462,16 @@
     "configDef": {
       "configModel": {
         "type": "object",
-        "title": "Credentials Config",
+        "title": "Magento 2 Credentials Config",
         "properties": {
-          "consumer_key": {
-            "title": "Consumer Key",
-            "type": "string"
-          },
-          "consumer_secret": {
-            "title": "Consumer Secret",
-            "type": "string"
-          },
           "access_token": {
             "title": "Access Token",
-            "type": "string"
-          },
-          "access_token_secret": {
-            "title": "Access Token Secret",
             "type": "string"
           }
         },
         "required": ["access_token"]
       },
-      "configView": [
-        {
-          "key": "access_token",
-          "title": "Access Token"
-        }
-      ],
+      "configView": ["access_token"],
       "configValues": {}
     }
   }
