@@ -832,7 +832,6 @@
                   "description": "Attribute code"
                 },
                 "value": {
-                  "type": "string",
                   "description": "Attribute value"
                 }
               },
@@ -844,6 +843,12 @@
       },
       "saveOptions": {
         "type": "boolean"
+      },
+      "matrixChildren": {
+        "type": "array",
+        "items": {
+          "$ref": "#"
+        }
       }
     },
     "required": ["product"]

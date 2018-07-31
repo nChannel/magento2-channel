@@ -29,7 +29,7 @@
               }
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -64,7 +64,7 @@
               }
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -94,7 +94,7 @@
               }
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -133,7 +133,7 @@
               }
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -160,7 +160,7 @@
               }
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -187,7 +187,7 @@
               }
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1485,7 +1485,7 @@
               "page": 1
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1540,7 +1540,7 @@
               "page": 1
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1575,7 +1575,7 @@
               "page": 1
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1649,7 +1649,7 @@
               "page": 1
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1677,7 +1677,7 @@
               "page": 1
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1705,7 +1705,7 @@
               "page": 1
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1737,7 +1737,7 @@
               }
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1776,7 +1776,7 @@
               }
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1802,7 +1802,7 @@
               }
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1828,7 +1828,7 @@
               }
             }
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1865,7 +1865,7 @@
             },
             "salesOrderRemoteID": 10
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1929,7 +1929,7 @@
             },
             "salesOrderRemoteID": 10
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1961,7 +1961,7 @@
             },
             "salesOrderRemoteID": 10
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -1993,7 +1993,7 @@
             },
             "salesOrderRemoteID": 10
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -2011,63 +2011,158 @@
       ]
     },
     {
-      "functionName": "InsertProduct",
+      "functionName": "InsertProductSimple",
       "tests": [
         {
           "ncStatusCode": 201,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSku",
+                "name": "testSku",
+                "attribute_set_id": 9,
+                "price": 3.99
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products",
               "method": "POST",
               "replyHeaders": {},
-              "statusCode": 201,
+              "statusCode": 200,
               "responsePayload": {
-                "product": {
-                  "id": 1073339459,
-                  "sku": "test"
-                }
+                "id": 2064,
+                "sku": "TestStatusCode",
+                "name": "statusTest",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "status": 1,
+                "visibility": 4,
+                "type_id": "simple",
+                "created_at": "2018-07-30 17:33:16",
+                "updated_at": "2018-07-30 17:33:16",
+                "extension_attributes": {
+                  "stock_item": {
+                    "item_id": 2061,
+                    "product_id": 2064,
+                    "stock_id": 1,
+                    "qty": null,
+                    "is_in_stock": false,
+                    "is_qty_decimal": false,
+                    "show_default_notification_message": false,
+                    "use_config_min_qty": true,
+                    "min_qty": 0,
+                    "use_config_min_sale_qty": 1,
+                    "min_sale_qty": 1,
+                    "use_config_max_sale_qty": true,
+                    "max_sale_qty": 10000,
+                    "use_config_backorders": true,
+                    "backorders": 0,
+                    "use_config_notify_stock_qty": true,
+                    "notify_stock_qty": 1,
+                    "use_config_qty_increments": true,
+                    "qty_increments": 0,
+                    "use_config_enable_qty_inc": true,
+                    "enable_qty_increments": false,
+                    "use_config_manage_stock": true,
+                    "manage_stock": true,
+                    "low_stock_date": null,
+                    "is_decimal_divided": false,
+                    "stock_status_changed_auto": 0
+                  }
+                },
+                "product_links": [],
+                "options": [],
+                "media_gallery_entries": [],
+                "tier_prices": [],
+                "custom_attributes": [
+                  {
+                    "attribute_code": "color",
+                    "value": "49"
+                  },
+                  {
+                    "attribute_code": "category_ids",
+                    "value": []
+                  },
+                  {
+                    "attribute_code": "options_container",
+                    "value": "container2"
+                  },
+                  {
+                    "attribute_code": "required_options",
+                    "value": "0"
+                  },
+                  {
+                    "attribute_code": "has_options",
+                    "value": "0"
+                  },
+                  {
+                    "attribute_code": "url_key",
+                    "value": "statustest"
+                  },
+                  {
+                    "attribute_code": "tax_class_id",
+                    "value": "2"
+                  },
+                  {
+                    "attribute_code": "size",
+                    "value": "91"
+                  }
+                ]
               }
             }
           ],
           "channelProfile": {
-            "productBusinessReferences": ["productid"]
+            "productBusinessReferences": ["product.sku"]
           }
         },
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSku",
+                "name": "testSku",
+                "attribute_set_id": 9,
+                "price": 3.99
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products",
               "method": "POST",
               "replyHeaders": {},
-              "statusCode": 400,
+              "statusCode": 401,
               "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "productBusinessReferences": ["productid"]
+            "productBusinessReferences": ["product.sku"]
           }
         },
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSku",
+                "name": "testSku",
+                "attribute_set_id": 9,
+                "price": 3.99
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products",
               "method": "POST",
               "replyHeaders": {},
               "statusCode": 429,
@@ -2075,19 +2170,26 @@
             }
           ],
           "channelProfile": {
-            "productBusinessReferences": ["productid"]
+            "productBusinessReferences": ["product.sku"]
           }
         },
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSku",
+                "name": "testSku",
+                "attribute_set_id": 9,
+                "price": 3.99
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products",
               "method": "POST",
               "replyHeaders": {},
               "statusCode": 500,
@@ -2095,69 +2197,263 @@
             }
           ],
           "channelProfile": {
-            "productBusinessReferences": ["productid"]
+            "productBusinessReferences": ["product.sku"]
           }
         }
       ]
     },
     {
-      "functionName": "InsertProductGroup",
+      "functionName": "InsertProductMatrix",
       "tests": [
         {
           "ncStatusCode": 201,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSkuM",
+                "name": "testSkuM",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "type_id": "configurable"
+              },
+              "matrixChildren": [
+                {
+                  "product": {
+                    "sku": "testSkuC",
+                    "name": "testSkuC",
+                    "attribute_set_id": 9,
+                    "price": 3.99,
+                    "type_id": "simple"
+                  }
+                }
+              ]
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products",
               "method": "POST",
               "replyHeaders": {},
-              "statusCode": 201,
+              "statusCode": 200,
               "responsePayload": {
-                "product": {
-                  "id": 1073339459,
-                  "sku": "test"
-                }
+                "id": 2064,
+                "sku": "testSkuC",
+                "name": "testSkuC",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "status": 1,
+                "visibility": 4,
+                "type_id": "simple",
+                "created_at": "2018-07-30 17:33:16",
+                "updated_at": "2018-07-30 17:33:16",
+                "extension_attributes": {
+                  "stock_item": {
+                    "item_id": 2061,
+                    "product_id": 2064,
+                    "stock_id": 1,
+                    "qty": null,
+                    "is_in_stock": false,
+                    "is_qty_decimal": false,
+                    "show_default_notification_message": false,
+                    "use_config_min_qty": true,
+                    "min_qty": 0,
+                    "use_config_min_sale_qty": 1,
+                    "min_sale_qty": 1,
+                    "use_config_max_sale_qty": true,
+                    "max_sale_qty": 10000,
+                    "use_config_backorders": true,
+                    "backorders": 0,
+                    "use_config_notify_stock_qty": true,
+                    "notify_stock_qty": 1,
+                    "use_config_qty_increments": true,
+                    "qty_increments": 0,
+                    "use_config_enable_qty_inc": true,
+                    "enable_qty_increments": false,
+                    "use_config_manage_stock": true,
+                    "manage_stock": true,
+                    "low_stock_date": null,
+                    "is_decimal_divided": false,
+                    "stock_status_changed_auto": 0
+                  }
+                },
+                "product_links": [],
+                "options": [],
+                "media_gallery_entries": [],
+                "tier_prices": [],
+                "custom_attributes": [
+                  {
+                    "attribute_code": "color",
+                    "value": "49"
+                  },
+                  {
+                    "attribute_code": "category_ids",
+                    "value": []
+                  },
+                  {
+                    "attribute_code": "options_container",
+                    "value": "container2"
+                  },
+                  {
+                    "attribute_code": "required_options",
+                    "value": "0"
+                  },
+                  {
+                    "attribute_code": "has_options",
+                    "value": "0"
+                  },
+                  {
+                    "attribute_code": "url_key",
+                    "value": "statustest"
+                  },
+                  {
+                    "attribute_code": "tax_class_id",
+                    "value": "2"
+                  },
+                  {
+                    "attribute_code": "size",
+                    "value": "91"
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "/V1/products",
+              "method": "POST",
+              "replyHeaders": {},
+              "statusCode": 200,
+              "responsePayload": {
+                "id": 1234,
+                "sku": "testSkuM",
+                "name": "testSkuM",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "status": 1,
+                "visibility": 4,
+                "type_id": "configurable",
+                "created_at": "2018-07-30 17:33:16",
+                "updated_at": "2018-07-30 17:33:16",
+                "extension_attributes": {
+                  "stock_item": {
+                    "item_id": 20612,
+                    "product_id": 1234,
+                    "stock_id": 1,
+                    "qty": null,
+                    "is_in_stock": false,
+                    "is_qty_decimal": false,
+                    "show_default_notification_message": false,
+                    "use_config_min_qty": true,
+                    "min_qty": 0,
+                    "use_config_min_sale_qty": 1,
+                    "min_sale_qty": 1,
+                    "use_config_max_sale_qty": true,
+                    "max_sale_qty": 10000,
+                    "use_config_backorders": true,
+                    "backorders": 0,
+                    "use_config_notify_stock_qty": true,
+                    "notify_stock_qty": 1,
+                    "use_config_qty_increments": true,
+                    "qty_increments": 0,
+                    "use_config_enable_qty_inc": true,
+                    "enable_qty_increments": false,
+                    "use_config_manage_stock": true,
+                    "manage_stock": true,
+                    "low_stock_date": null,
+                    "is_decimal_divided": false,
+                    "stock_status_changed_auto": 0
+                  },
+                  "configurable_product_links": [2064]
+                },
+                "product_links": [],
+                "options": [],
+                "media_gallery_entries": [],
+                "tier_prices": [],
+                "custom_attributes": [
+                  { "attribute_code": "color", "value": "49" },
+                  { "attribute_code": "category_ids", "value": [] },
+                  { "attribute_code": "options_container", "value": "container2" },
+                  { "attribute_code": "required_options", "value": "0" },
+                  { "attribute_code": "has_options", "value": "0" },
+                  { "attribute_code": "url_key", "value": "statustest" },
+                  { "attribute_code": "tax_class_id", "value": "2" },
+                  { "attribute_code": "size", "value": "91" }
+                ]
               }
             }
           ],
           "channelProfile": {
-            "productGroupBusinessReferences": ["productgroupid"]
+            "productBusinessReferences": ["product.sku"]
           }
         },
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSkuM",
+                "name": "testSkuM",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "type_id": "configurable"
+              },
+              "matrixChildren": [
+                {
+                  "product": {
+                    "sku": "testSkuC",
+                    "name": "testSkuC",
+                    "attribute_set_id": 9,
+                    "price": 3.99,
+                    "type_id": "simple"
+                  }
+                }
+              ]
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products",
               "method": "POST",
               "replyHeaders": {},
-              "statusCode": 400,
+              "statusCode": 401,
               "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "productGroupBusinessReferences": ["productgroupid"]
+            "productBusinessReferences": ["product.sku"]
           }
         },
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSkuM",
+                "name": "testSkuM",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "type_id": "configurable"
+              },
+              "matrixChildren": [
+                {
+                  "product": {
+                    "sku": "testSkuC",
+                    "name": "testSkuC",
+                    "attribute_set_id": 9,
+                    "price": 3.99,
+                    "type_id": "simple"
+                  }
+                }
+              ]
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products",
               "method": "POST",
               "replyHeaders": {},
               "statusCode": 429,
@@ -2165,19 +2461,38 @@
             }
           ],
           "channelProfile": {
-            "productGroupBusinessReferences": ["productgroupid"]
+            "productBusinessReferences": ["product.sku"]
           }
         },
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSkuM",
+                "name": "testSkuM",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "type_id": "configurable"
+              },
+              "matrixChildren": [
+                {
+                  "product": {
+                    "sku": "testSkuC",
+                    "name": "testSkuC",
+                    "attribute_set_id": 9,
+                    "price": 3.99,
+                    "type_id": "simple"
+                  }
+                }
+              ]
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products",
               "method": "POST",
               "replyHeaders": {},
               "statusCode": 500,
@@ -2185,7 +2500,7 @@
             }
           ],
           "channelProfile": {
-            "productGroupBusinessReferences": ["productgroupid"]
+            "productBusinessReferences": ["product.sku"]
           }
         }
       ]
@@ -2295,7 +2610,7 @@
             },
             "customerRemoteID": 17
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -2357,7 +2672,7 @@
             },
             "customerRemoteID": 17
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -2385,7 +2700,7 @@
             },
             "customerRemoteID": 17
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -2413,7 +2728,7 @@
             },
             "customerRemoteID": 17
           },
-          "baseUri": "https://example.com/rest/default",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
@@ -2431,83 +2746,172 @@
       ]
     },
     {
-      "functionName": "UpdateProduct",
+      "functionName": "UpdateProductSimple",
       "tests": [
         {
           "ncStatusCode": 200,
           "payload": {
-            "doc": {}
+            "doc": { "product": { "sku": "testSku", "name": "testSku", "attribute_set_id": 9, "price": 3.99 } }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products/testSku",
               "method": "PUT",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "product": {
-                  "id": 1073339459,
-                  "sku": "test"
-                }
+                "id": 2064,
+                "sku": "TestStatusCode",
+                "name": "statusTest",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "status": 1,
+                "visibility": 4,
+                "type_id": "simple",
+                "created_at": "2018-07-30 17:33:16",
+                "updated_at": "2018-07-30 17:33:16",
+                "extension_attributes": {
+                  "stock_item": {
+                    "item_id": 2061,
+                    "product_id": 2064,
+                    "stock_id": 1,
+                    "qty": null,
+                    "is_in_stock": false,
+                    "is_qty_decimal": false,
+                    "show_default_notification_message": false,
+                    "use_config_min_qty": true,
+                    "min_qty": 0,
+                    "use_config_min_sale_qty": 1,
+                    "min_sale_qty": 1,
+                    "use_config_max_sale_qty": true,
+                    "max_sale_qty": 10000,
+                    "use_config_backorders": true,
+                    "backorders": 0,
+                    "use_config_notify_stock_qty": true,
+                    "notify_stock_qty": 1,
+                    "use_config_qty_increments": true,
+                    "qty_increments": 0,
+                    "use_config_enable_qty_inc": true,
+                    "enable_qty_increments": false,
+                    "use_config_manage_stock": true,
+                    "manage_stock": true,
+                    "low_stock_date": null,
+                    "is_decimal_divided": false,
+                    "stock_status_changed_auto": 0
+                  }
+                },
+                "product_links": [],
+                "options": [],
+                "media_gallery_entries": [],
+                "tier_prices": [],
+                "custom_attributes": [
+                  {
+                    "attribute_code": "color",
+                    "value": "49"
+                  },
+                  {
+                    "attribute_code": "category_ids",
+                    "value": []
+                  },
+                  {
+                    "attribute_code": "options_container",
+                    "value": "container2"
+                  },
+                  {
+                    "attribute_code": "required_options",
+                    "value": "0"
+                  },
+                  {
+                    "attribute_code": "has_options",
+                    "value": "0"
+                  },
+                  {
+                    "attribute_code": "url_key",
+                    "value": "statustest"
+                  },
+                  {
+                    "attribute_code": "tax_class_id",
+                    "value": "2"
+                  },
+                  {
+                    "attribute_code": "size",
+                    "value": "91"
+                  }
+                ]
               }
             }
           ],
-          "channelProfile": {
-            "productBusinessReferences": ["productid"]
-          }
+          "channelProfile": { "productBusinessReferences": ["product.sku"] }
         },
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSku",
+                "name": "testSku",
+                "attribute_set_id": 9,
+                "price": 3.99
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products/testSku",
               "method": "PUT",
               "replyHeaders": {},
-              "statusCode": 400,
+              "statusCode": 401,
               "responsePayload": {}
             }
           ],
-          "channelProfile": {
-            "productBusinessReferences": ["productid"]
-          }
+          "channelProfile": { "productBusinessReferences": ["product.sku"] }
         },
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSku",
+                "name": "testSku",
+                "attribute_set_id": 9,
+                "price": 3.99
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products/testSku",
               "method": "PUT",
               "replyHeaders": {},
               "statusCode": 429,
               "responsePayload": {}
             }
           ],
-          "channelProfile": {
-            "productBusinessReferences": ["productid"]
-          }
+          "channelProfile": { "productBusinessReferences": ["product.sku"] }
         },
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSku",
+                "name": "testSku",
+                "attribute_set_id": 9,
+                "price": 3.99
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products/testSku",
               "method": "PUT",
               "replyHeaders": {},
               "statusCode": 500,
@@ -2515,97 +2919,334 @@
             }
           ],
           "channelProfile": {
-            "productBusinessReferences": ["productid"]
+            "productBusinessReferences": ["product.sku"]
           }
         }
       ]
     },
     {
-      "functionName": "UpdateProductGroup",
+      "functionName": "UpdateProductMatrix",
       "tests": [
         {
           "ncStatusCode": 200,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSkuM",
+                "name": "testSkuM",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "type_id": "configurable"
+              },
+              "matrixChildren": [
+                {
+                  "product": {
+                    "sku": "testSkuC",
+                    "name": "testSkuC",
+                    "attribute_set_id": 9,
+                    "price": 3.99,
+                    "type_id": "simple"
+                  }
+                }
+              ]
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
-              "method": "PUT",
+              "uri": "/V1/products",
+              "method": "POST",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "product": {
-                  "id": 1073339459,
-                  "sku": "test"
-                }
+                "id": 2064,
+                "sku": "testSkuC",
+                "name": "testSkuC",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "status": 1,
+                "visibility": 4,
+                "type_id": "simple",
+                "created_at": "2018-07-30 17:33:16",
+                "updated_at": "2018-07-30 17:33:16",
+                "extension_attributes": {
+                  "stock_item": {
+                    "item_id": 2061,
+                    "product_id": 2064,
+                    "stock_id": 1,
+                    "qty": null,
+                    "is_in_stock": false,
+                    "is_qty_decimal": false,
+                    "show_default_notification_message": false,
+                    "use_config_min_qty": true,
+                    "min_qty": 0,
+                    "use_config_min_sale_qty": 1,
+                    "min_sale_qty": 1,
+                    "use_config_max_sale_qty": true,
+                    "max_sale_qty": 10000,
+                    "use_config_backorders": true,
+                    "backorders": 0,
+                    "use_config_notify_stock_qty": true,
+                    "notify_stock_qty": 1,
+                    "use_config_qty_increments": true,
+                    "qty_increments": 0,
+                    "use_config_enable_qty_inc": true,
+                    "enable_qty_increments": false,
+                    "use_config_manage_stock": true,
+                    "manage_stock": true,
+                    "low_stock_date": null,
+                    "is_decimal_divided": false,
+                    "stock_status_changed_auto": 0
+                  }
+                },
+                "product_links": [],
+                "options": [],
+                "media_gallery_entries": [],
+                "tier_prices": [],
+                "custom_attributes": [
+                  {
+                    "attribute_code": "color",
+                    "value": "49"
+                  },
+                  {
+                    "attribute_code": "category_ids",
+                    "value": []
+                  },
+                  {
+                    "attribute_code": "options_container",
+                    "value": "container2"
+                  },
+                  {
+                    "attribute_code": "required_options",
+                    "value": "0"
+                  },
+                  {
+                    "attribute_code": "has_options",
+                    "value": "0"
+                  },
+                  {
+                    "attribute_code": "url_key",
+                    "value": "statustest"
+                  },
+                  {
+                    "attribute_code": "tax_class_id",
+                    "value": "2"
+                  },
+                  {
+                    "attribute_code": "size",
+                    "value": "91"
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "/V1/products",
+              "method": "POST",
+              "replyHeaders": {},
+              "statusCode": 200,
+              "responsePayload": {
+                "id": 1234,
+                "sku": "testSkuM",
+                "name": "testSkuM",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "status": 1,
+                "visibility": 4,
+                "type_id": "configurable",
+                "created_at": "2018-07-30 17:33:16",
+                "updated_at": "2018-07-30 17:33:16",
+                "extension_attributes": {
+                  "stock_item": {
+                    "item_id": 20612,
+                    "product_id": 1234,
+                    "stock_id": 1,
+                    "qty": null,
+                    "is_in_stock": false,
+                    "is_qty_decimal": false,
+                    "show_default_notification_message": false,
+                    "use_config_min_qty": true,
+                    "min_qty": 0,
+                    "use_config_min_sale_qty": 1,
+                    "min_sale_qty": 1,
+                    "use_config_max_sale_qty": true,
+                    "max_sale_qty": 10000,
+                    "use_config_backorders": true,
+                    "backorders": 0,
+                    "use_config_notify_stock_qty": true,
+                    "notify_stock_qty": 1,
+                    "use_config_qty_increments": true,
+                    "qty_increments": 0,
+                    "use_config_enable_qty_inc": true,
+                    "enable_qty_increments": false,
+                    "use_config_manage_stock": true,
+                    "manage_stock": true,
+                    "low_stock_date": null,
+                    "is_decimal_divided": false,
+                    "stock_status_changed_auto": 0
+                  },
+                  "configurable_product_links": [2064]
+                },
+                "product_links": [],
+                "options": [],
+                "media_gallery_entries": [],
+                "tier_prices": [],
+                "custom_attributes": [
+                  {
+                    "attribute_code": "color",
+                    "value": "49"
+                  },
+                  {
+                    "attribute_code": "category_ids",
+                    "value": []
+                  },
+                  {
+                    "attribute_code": "options_container",
+                    "value": "container2"
+                  },
+                  {
+                    "attribute_code": "required_options",
+                    "value": "0"
+                  },
+                  {
+                    "attribute_code": "has_options",
+                    "value": "0"
+                  },
+                  {
+                    "attribute_code": "url_key",
+                    "value": "statustest"
+                  },
+                  {
+                    "attribute_code": "tax_class_id",
+                    "value": "2"
+                  },
+                  {
+                    "attribute_code": "size",
+                    "value": "91"
+                  }
+                ]
               }
             }
           ],
           "channelProfile": {
-            "productGroupBusinessReferences": ["productgroupid"]
+            "productBusinessReferences": ["product.sku"]
           }
         },
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSkuM",
+                "name": "testSkuM",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "type_id": "configurable"
+              },
+              "matrixChildren": [
+                {
+                  "product": {
+                    "sku": "testSkuC",
+                    "name": "testSkuC",
+                    "attribute_set_id": 9,
+                    "price": 3.99,
+                    "type_id": "simple"
+                  }
+                }
+              ]
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
-              "method": "PUT",
+              "uri": "/V1/products",
+              "method": "POST",
               "replyHeaders": {},
-              "statusCode": 400,
+              "statusCode": 401,
               "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "productGroupBusinessReferences": ["productgroupid"]
+            "productBusinessReferences": ["product.sku"]
           }
         },
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSkuM",
+                "name": "testSkuM",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "type_id": "configurable"
+              },
+              "matrixChildren": [
+                {
+                  "product": {
+                    "sku": "testSkuC",
+                    "name": "testSkuC",
+                    "attribute_set_id": 9,
+                    "price": 3.99,
+                    "type_id": "simple"
+                  }
+                }
+              ]
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
-              "method": "PUT",
+              "uri": "/V1/products",
+              "method": "POST",
               "replyHeaders": {},
               "statusCode": 429,
               "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "productGroupBusinessReferences": ["productgroupid"]
+            "productBusinessReferences": ["product.sku"]
           }
         },
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSkuM",
+                "name": "testSkuM",
+                "attribute_set_id": 9,
+                "price": 3.99,
+                "type_id": "configurable"
+              },
+              "matrixChildren": [
+                {
+                  "product": {
+                    "sku": "testSkuC",
+                    "name": "testSkuC",
+                    "attribute_set_id": 9,
+                    "price": 3.99,
+                    "type_id": "simple"
+                  }
+                }
+              ]
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
-              "method": "PUT",
+              "uri": "/V1/products",
+              "method": "POST",
               "replyHeaders": {},
               "statusCode": 500,
               "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "productGroupBusinessReferences": ["productgroupid"]
+            "productBusinessReferences": ["product.sku"]
           }
         }
       ]
@@ -2616,58 +3257,147 @@
         {
           "ncStatusCode": 200,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSku",
+                "price": 32.99
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products/testSku",
               "method": "PUT",
               "replyHeaders": {},
               "statusCode": 200,
               "responsePayload": {
-                "product": {
-                  "id": 1073339459,
-                  "sku": "test"
-                }
+                "id": 2066,
+                "sku": "testSku",
+                "name": "statusTest3",
+                "attribute_set_id": 9,
+                "price": 32.99,
+                "status": 1,
+                "visibility": 4,
+                "type_id": "simple",
+                "created_at": "2018-07-31 21:10:30",
+                "updated_at": "2018-07-31 21:10:30",
+                "extension_attributes": {
+                  "stock_item": {
+                    "item_id": 2062,
+                    "product_id": 2066,
+                    "stock_id": 1,
+                    "qty": null,
+                    "is_in_stock": false,
+                    "is_qty_decimal": false,
+                    "show_default_notification_message": false,
+                    "use_config_min_qty": true,
+                    "min_qty": 0,
+                    "use_config_min_sale_qty": 1,
+                    "min_sale_qty": 1,
+                    "use_config_max_sale_qty": true,
+                    "max_sale_qty": 10000,
+                    "use_config_backorders": true,
+                    "backorders": 0,
+                    "use_config_notify_stock_qty": true,
+                    "notify_stock_qty": 1,
+                    "use_config_qty_increments": true,
+                    "qty_increments": 0,
+                    "use_config_enable_qty_inc": true,
+                    "enable_qty_increments": false,
+                    "use_config_manage_stock": true,
+                    "manage_stock": true,
+                    "low_stock_date": null,
+                    "is_decimal_divided": false,
+                    "stock_status_changed_auto": 0
+                  }
+                },
+                "product_links": [],
+                "options": [],
+                "media_gallery_entries": [],
+                "tier_prices": [],
+                "custom_attributes": [
+                  {
+                    "attribute_code": "color",
+                    "value": "49"
+                  },
+                  {
+                    "attribute_code": "category_ids",
+                    "value": []
+                  },
+                  {
+                    "attribute_code": "options_container",
+                    "value": "container2"
+                  },
+                  {
+                    "attribute_code": "required_options",
+                    "value": "0"
+                  },
+                  {
+                    "attribute_code": "has_options",
+                    "value": "0"
+                  },
+                  {
+                    "attribute_code": "url_key",
+                    "value": "statustest3"
+                  },
+                  {
+                    "attribute_code": "tax_class_id",
+                    "value": "2"
+                  },
+                  {
+                    "attribute_code": "size",
+                    "value": "91"
+                  }
+                ]
               }
             }
           ],
           "channelProfile": {
-            "productPricingBusinessReferences": ["productpricingid"]
+            "productPricingBusinessReferences": ["product.sku"]
           }
         },
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSku",
+                "price": 32.99
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products/testSku",
               "method": "PUT",
               "replyHeaders": {},
-              "statusCode": 400,
+              "statusCode": 401,
               "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "productPricingBusinessReferences": ["productpricingid"]
+            "productPricingBusinessReferences": ["product.sku"]
           }
         },
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSku",
+                "price": 32.99
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products/testSku",
               "method": "PUT",
               "replyHeaders": {},
               "statusCode": 429,
@@ -2675,19 +3405,24 @@
             }
           ],
           "channelProfile": {
-            "productPricingBusinessReferences": ["productpricingid"]
+            "productPricingBusinessReferences": ["product.sku"]
           }
         },
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": {
+              "product": {
+                "sku": "testSku",
+                "price": 32.99
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products/testSku",
               "method": "PUT",
               "replyHeaders": {},
               "statusCode": 500,
@@ -2695,7 +3430,7 @@
             }
           ],
           "channelProfile": {
-            "productPricingBusinessReferences": ["productpricingid"]
+            "productPricingBusinessReferences": ["product.sku"]
           }
         }
       ]
@@ -2706,58 +3441,68 @@
         {
           "ncStatusCode": 200,
           "payload": {
-            "doc": {}
+            "doc": {
+              "stockItem": {
+                "sku": "testSku",
+                "qty": 443
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products/testSku/stockItems/undefined",
               "method": "PUT",
               "replyHeaders": {},
               "statusCode": 200,
-              "responsePayload": {
-                "product": {
-                  "id": 1073339459,
-                  "sku": "test"
-                }
-              }
+              "responsePayload": "2062"
             }
           ],
           "channelProfile": {
-            "productQuantityBusinessReferences": ["productquantityid"]
+            "productQuantityBusinessReferences": ["stockItem.stock_id", "stockItem.product_id"]
           }
         },
         {
           "ncStatusCode": 400,
           "payload": {
-            "doc": {}
+            "doc": {
+              "stockItem": {
+                "sku": "testSku",
+                "qty": 443
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products/testSku/stockItems/undefined",
               "method": "PUT",
               "replyHeaders": {},
-              "statusCode": 400,
+              "statusCode": 401,
               "responsePayload": {}
             }
           ],
           "channelProfile": {
-            "productQuantityBusinessReferences": ["productquantityid"]
+            "productQuantityBusinessReferences": ["stockItem.stock_id", "stockItem.product_id"]
           }
         },
         {
           "ncStatusCode": 429,
           "payload": {
-            "doc": {}
+            "doc": {
+              "stockItem": {
+                "sku": "testSku",
+                "qty": 443
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products/testSku/stockItems/undefined",
               "method": "PUT",
               "replyHeaders": {},
               "statusCode": 429,
@@ -2765,19 +3510,24 @@
             }
           ],
           "channelProfile": {
-            "productQuantityBusinessReferences": ["productquantityid"]
+            "productQuantityBusinessReferences": ["stockItem.stock_id", "stockItem.product_id"]
           }
         },
         {
           "ncStatusCode": 500,
           "payload": {
-            "doc": {}
+            "doc": {
+              "stockItem": {
+                "sku": "testSku",
+                "qty": 443
+              }
+            }
           },
-          "baseUri": "https://localhost",
+          "baseUri": "https://example.com/rest/all",
           "defaultHeaders": {},
           "links": [
             {
-              "uri": "/",
+              "uri": "/V1/products/testSku/stockItems/undefined",
               "method": "PUT",
               "replyHeaders": {},
               "statusCode": 500,
@@ -2785,7 +3535,7 @@
             }
           ],
           "channelProfile": {
-            "productQuantityBusinessReferences": ["productquantityid"]
+            "productQuantityBusinessReferences": ["stockItem.stock_id", "stockItem.product_id"]
           }
         }
       ]
