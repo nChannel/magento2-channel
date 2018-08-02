@@ -214,17 +214,216 @@
           "customerBusinessReferences": ["email"]
         }
       }
+    },
+    {
+      "name": "PUT PRODUCT",
+      "description": "PUT PRODUCT",
+      "channelVerb": "PUT",
+      "channelNoun": "PRODUCT",
+      "ruleDef": {
+        "ruleSchema": {},
+        "defaultRuleValues": {}
+      },
+      "configDef": {
+        "configModel": {
+          "type": "object",
+          "properties": {
+            "canInsertSimpleProduct": {
+              "type": "boolean",
+              "title": "PUT Product, canInsertSimpleProduct"
+            },
+            "canInsertMatrixProduct": {
+              "type": "boolean",
+              "title": "PUT Product, canInsertMatrixProduct"
+            },
+            "canUpdateSimpleProduct": {
+              "type": "boolean",
+              "title": "PUT Product, canUpdateSimpleProduct"
+            },
+            "canUpdateMatrixProduct": {
+              "type": "boolean",
+              "title": "PUT Product, canUpdateMatrixProduct"
+            },
+            "canUpdateProductPricingFlag": {
+              "type": "boolean",
+              "title": "PUT Product, canUpdateProductPricingFlag"
+            },
+            "canUpdateProductQuantityFlag": {
+              "type": "boolean",
+              "title": "PUT Product, canUpdateProductQuantityFlag"
+            },
+            "doInsertSimpleProduct": {
+              "type": "boolean",
+              "title": "PUT Product, doInsertSimpleProduct"
+            },
+            "doInsertMatrixProduct": {
+              "type": "boolean",
+              "title": "PUT Product, doInsertMatrixProduct"
+            },
+            "doUpdateSimpleProduct": {
+              "type": "boolean",
+              "title": "PUT Product, doUpdateSimpleProduct"
+            },
+            "doUpdateMatrixProduct": {
+              "type": "boolean",
+              "title": "PUT Product, doUpdateMatrixProduct"
+            },
+            "doUpdateProductPricingFlag": {
+              "type": "boolean",
+              "title": "PUT Product, doUpdateProductPricingFlag"
+            },
+            "doUpdateProductQuantityFlag": {
+              "type": "boolean",
+              "title": "PUT Product, doUpdateProductQuantityFlag"
+            },
+            "doPutProductPricingFlag": {
+              "type": "boolean",
+              "title": "PUT Product, doPutProductPricingFlag"
+            },
+            "doPutProductQuantityFlag": {
+              "type": "boolean",
+              "title": "PUT Product, doPutProductQuantityFlag"
+            }
+          },
+          "required": [
+            "canInsertSimpleProduct",
+            "canInsertMatrixProduct",
+            "canUpdateSimpleProduct",
+            "canUpdateMatrixProduct",
+            "canUpdateProductPricingFlag",
+            "canUpdateProductQuantityFlag",
+            "doInsertSimpleProduct",
+            "doInsertMatrixProduct",
+            "doUpdateSimpleProduct",
+            "doUpdateMatrixProduct",
+            "doUpdateProductPricingFlag",
+            "doUpdateProductQuantityFlag",
+            "doPutProductPricingFlag",
+            "doPutProductQuantityFlag"
+          ]
+        },
+        "configView": [
+          "doInsertSimpleProduct",
+          "doInsertMatrixProduct",
+          "doUpdateSimpleProduct",
+          "doUpdateMatrixProduct",
+          "doUpdateProductPricingFlag",
+          "doUpdateProductQuantityFlag",
+          "doPutProductPricingFlag",
+          "doPutProductQuantityFlag"
+        ],
+        "configValues": {
+          "canInsertSimpleProduct": true,
+          "canInsertMatrixProduct": true,
+          "canUpdateSimpleProduct": true,
+          "canUpdateMatrixProduct": true,
+          "canUpdateProductPricingFlag": true,
+          "canUpdateProductQuantityFlag": true,
+          "doInsertSimpleProduct": true,
+          "doInsertMatrixProduct": true,
+          "doUpdateSimpleProduct": true,
+          "doUpdateMatrixProduct": true,
+          "doUpdateProductPricingFlag": true,
+          "doUpdateProductQuantityFlag": true,
+          "doPutProductPricingFlag": true,
+          "doPutProductQuantityFlag": true
+        }
+      },
+      "documentDef": {
+        "schema": {},
+        "remoteID": "product.id",
+        "referenceLocation": {
+          "productBusinessReferences": ["product.sku"]
+        }
+      }
+    },
+    {
+      "name": "PUT PRODUCTQUANTITY",
+      "description": "PUT PRODUCTQUANTITY",
+      "channelVerb": "PUT",
+      "channelNoun": "PRODUCTQUANTITY",
+      "ruleDef": {
+        "ruleSchema": {},
+        "defaultRuleValues": {}
+      },
+      "configDef": {
+        "configModel": {
+          "type": "object",
+          "properties": {
+            "canUpdateProductQuantityFlag": {
+              "type": "boolean",
+              "title": "PUT ProductQuantity, canUpdateProductQuantityFlag"
+            },
+            "doUpdateProductQuantityFlag": {
+              "type": "boolean",
+              "title": "PUT ProductQuantity, doUpdateProductQuantityFlag"
+            }
+          },
+          "required": ["canUpdateProductQuantityFlag", "doUpdateProductQuantityFlag"]
+        },
+        "configView": ["doUpdateProductQuantityFlag"],
+        "configValues": {
+          "canUpdateProductQuantityFlag": true,
+          "doUpdateProductQuantityFlag": true
+        }
+      },
+      "documentDef": {
+        "schema": {},
+        "remoteID": "stockItem.item_id",
+        "referenceLocation": {
+          "productQuantityBusinessReferences": ["stockItem.stock_id", "stockItem.product_id"]
+        }
+      }
+    },
+    {
+      "name": "PUT PRODUCTPRICING",
+      "description": "PUT PRODUCTPRICING",
+      "channelVerb": "PUT",
+      "channelNoun": "PRODUCTPRICING",
+      "ruleDef": {
+        "ruleSchema": {},
+        "defaultRuleValues": {}
+      },
+      "configDef": {
+        "configModel": {
+          "type": "object",
+          "properties": {
+            "canUpdateProductPricingFlag": {
+              "type": "boolean",
+              "title": "PUT ProductPricing, canUpdateProductPricingFlag"
+            },
+            "doUpdateProductPricingFlag": {
+              "type": "boolean",
+              "title": "PUT ProductPricing, doUpdateProductPricingFlag"
+            }
+          },
+          "required": ["canUpdateProductPricingFlag", "doUpdateProductPricingFlag"]
+        },
+        "configView": ["doUpdateProductPricingFlag"],
+        "configValues": {
+          "canUpdateProductPricingFlag": true,
+          "doUpdateProductPricingFlag": true
+        }
+      },
+      "documentDef": {
+        "schema": {},
+        "referenceLocation": {
+          "productPricingBusinessReferences": ["product.sku"]
+        }
+      }
     }
   ],
   "channelSettingsSchema": {
     "configDef": {
       "configModel": {
         "type": "object",
-        "title": "Magento 2.0 Channel Settings",
+        "title": "Magento 2 Channel Settings",
         "properties": {
           "protocol": {
             "title": "Protocol",
-            "type": "string"
+            "type": "string",
+            "default": "https",
+            "enum": ["https", "http"]
           },
           "store_base_url": {
             "title": "Store Base URL",
@@ -232,35 +431,28 @@
           },
           "store_code": {
             "title": "Store Code",
-            "type": "string"
+            "type": "string",
+            "default": "all"
           },
           "implFolderName": {
             "title": "Implementation Folder Name",
-            "type": "string"
+            "type": "string",
+            "default": "magento2-channel"
           }
         },
         "required": ["protocol", "store_base_url", "implFolderName"]
       },
       "configView": [
-        {
-          "key": "protocol",
-          "title": "Protocol"
-        },
+        "protocol",
         {
           "key": "store_base_url",
-          "title": "Store Base URL"
+          "placeholder": "example.com/index.php"
         },
-        {
-          "key": "store_code",
-          "title": "Store Code"
-        },
-        {
-          "key": "implFolderName",
-          "title": "Implementation Folder Name"
-        }
+        "store_code"
       ],
       "configValues": {
         "protocol": "https",
+        "store_code": "all",
         "implFolderName": "magento2-channel"
       }
     }
@@ -270,33 +462,16 @@
     "configDef": {
       "configModel": {
         "type": "object",
-        "title": "Credentials Config",
+        "title": "Magento 2 Credentials Config",
         "properties": {
-          "consumer_key": {
-            "title": "Consumer Key",
-            "type": "string"
-          },
-          "consumer_secret": {
-            "title": "Consumer Secret",
-            "type": "string"
-          },
           "access_token": {
             "title": "Access Token",
-            "type": "string"
-          },
-          "access_token_secret": {
-            "title": "Access Token Secret",
             "type": "string"
           }
         },
         "required": ["access_token"]
       },
-      "configView": [
-        {
-          "key": "access_token",
-          "title": "Access Token"
-        }
-      ],
+      "configView": ["access_token"],
       "configValues": {}
     }
   }
